@@ -1,0 +1,13 @@
+*~
+*swp
+Gemfile.lock
+*/.sass-cache/*/*
+log/*
+logs/*
+.sass-cache/*
+.bundle/
+.bundle/*
+nbproject/
+*bak
+.sass-cache/
+tmp/*

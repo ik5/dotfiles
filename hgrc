@@ -1,0 +1,7 @@
+[ui]
+username = Ido Kanner <idok@linesip.com>
+
+[extensions]
+hgext.bookmarks =
+hggit = 
+

@@ -1,0 +1,3 @@
+set completion-ignore-case on
+"\C-[[A": history-search-backward
+"\C-[[B": history-search-forward
