@@ -86,9 +86,5 @@
 --regex-html=/id=\"([a-zA-Z0-9-]+)\"/\1/i,identifiers/
 --regex-html=/^[ \t]*<([a-zA-Z]+)[ \t]*.*>/\1/t,tag,tags/
 
---langmap=js:.js
---regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\{/\1/o,object/
---regex-JavaScript=/([A-Za-z0-9._$'"()]+)[ \t]*[:][ \t]*function[ \t]*\([^)]*\)/\1/f,function/
---regex-JavaScript=/([A-Za-z0-9._$]+)[ \t]*[:=][ \t]*\[/\1/a,array/
---regex-JavaScript=/([^= ]+)[ \t]*=[ \t]*'[^']*'/\1/s,string/
---regex-JavaScript=/([^= ]+)[ \t]*=[ \t]*"[^"]*"/\1/s,string/
+--regex-c=/^\s*#include\s+[<"](.*[^">])[>"]/\1/h,headers/
+
