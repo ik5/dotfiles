@@ -7,7 +7,7 @@ else
 fi
 
 export GOROOT=/usr/lib/go/
-export PATH="$HOME/.gem/ruby/2.3.0/bin:$GOPATH/bin/:$PATH"
+export PATH="$HOME/.gem/ruby/2.4.0/bin:$GOPATH/bin/:$PATH"
 
 alias ls='ls --color=always'
 alias ll='ls -lh'
