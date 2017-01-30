@@ -11,3 +11,6 @@ nbproject/
 *bak
 .sass-cache/
 tmp/*
+.ropeproject/*
+*/node_modules/*
+node_modules/*
