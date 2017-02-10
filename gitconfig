@@ -36,3 +36,5 @@
     lsi  = ls-files -o -i --exclude-standard # show ignored ignored
 [push]
 	default = matching
+[http "https://gopkg.in"]
+	followRedirects = true
