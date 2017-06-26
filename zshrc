@@ -1,4 +1,6 @@
+powerline-daemon -q
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
 
 if [ ! -z $GOPATH ]; then
   export GOPATH="$HOME/projects/go_resources/:$GOPATH"
@@ -328,4 +330,6 @@ fi
 
 ## END OF FILE #################################################################
 
+alias addvid="sudo modprobe uvcvideo"
+alias rmvid="sudo modprobe -r uvcvideo"
 screenfetch
