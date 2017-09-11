@@ -1,6 +1,5 @@
-powerline-daemon -q
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/lib/python3.6/site-packages/powerline/bindings/zsh/powerline.zsh
+#source $HOME/antigen.zsh
 
 if [ ! -z $GOPATH ]; then
   export GOPATH="$HOME/projects/go_resources/:$GOPATH"
@@ -24,13 +23,13 @@ if [ -f $HOME/.zshrc.private ]; then
   source $HOME/.zshrc.private
 fi
 
-#export PULSE_LATENCY_MSEC=60
-## Settings for umask
-#if (( EUID == 0 )); then
-#    umask 002
-#else
-#    umask 022
-#fi
+export PULSE_LATENCY_MSEC=60
+# Settings for umask
+if (( EUID == 0 )); then
+    umask 002
+else
+    umask 022
+fi
 
 ## Now, we'll give a few examples of what you might want to use in your
 ## .zshrc.local file (just copy'n'paste and uncomment it there):
@@ -48,74 +47,74 @@ fi
 ## ZLE tweaks ##
 
 ## use the vi navigation keys (hjkl) besides cursor keys in menu completion
-#bindkey -M menuselect 'h' vi-backward-char        # left
-#bindkey -M menuselect 'k' vi-up-line-or-history   # up
-#bindkey -M menuselect 'l' vi-forward-char         # right
-#bindkey -M menuselect 'j' vi-down-line-or-history # bottom
+bindkey -M menuselect 'h' vi-backward-char        # left
+bindkey -M menuselect 'k' vi-up-line-or-history   # up
+bindkey -M menuselect 'l' vi-forward-char         # right
+bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
 ## set command prediction from history, see 'man 1 zshcontrib'
 #is4 && zrcautoload predict-on && \
 #zle -N predict-on         && \
 #zle -N predict-off        && \
 #bindkey "^X^Z" predict-on && \
-#bindkey "^Z" predict-off
+#bindkey "^Z^X" predict-off
 
 ## press ctrl-q to quote line:
-#mquote () {
-#      zle beginning-of-line
-#      zle forward-word
-#      # RBUFFER="'$RBUFFER'"
-#      RBUFFER=${(q)RBUFFER}
-#      zle end-of-line
-#}
-#zle -N mquote && bindkey '^q' mquote
+mquote () {
+      zle beginning-of-line
+      zle forward-word
+      # RBUFFER="'$RBUFFER'"
+      RBUFFER=${(q)RBUFFER}
+      zle end-of-line
+}
+zle -N mquote && bindkey '^q' mquote
 
 ## define word separators (for stuff like backward-word, forward-word, backward-kill-word,..)
-#WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # the default
-#WORDCHARS=.
-#WORDCHARS='*?_[]~=&;!#$%^(){}'
-#WORDCHARS='${WORDCHARS:s@/@}'
+WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>' # the default
+WORDCHARS=.
+WORDCHARS='*?_[]~=&;!#$%^(){}'
+WORDCHARS='${WORDCHARS:s@/@}'
 
 # just type '...' to get '../..'
-#rationalise-dot() {
-#local MATCH
-#if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
-#  LBUFFER+=/
-#  zle self-insert
-#  zle self-insert
-#else
-#  zle self-insert
-#fi
-#}
-#zle -N rationalise-dot
-#bindkey . rationalise-dot
-## without this, typing a . aborts incremental history search
-#bindkey -M isearch . self-insert
+rationalise-dot() {
+local MATCH
+if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
+  LBUFFER+=/
+  zle self-insert
+  zle self-insert
+else
+  zle self-insert
+fi
+}
+zle -N rationalise-dot
+bindkey . rationalise-dot
+# without this, typing a . aborts incremental history search
+bindkey -M isearch . self-insert
 
-#bindkey '\eq' push-line-or-edit
+bindkey '\eq' push-line-or-edit
 
 ## some popular options ##
 
 ## add `|' to output redirections in the history
-#setopt histallowclobber
+setopt histallowclobber
 
 ## try to avoid the 'zsh: no matches found...'
-#setopt nonomatch
+setopt nonomatch
 
 ## warning if file exists ('cat /dev/null > ~/.zshrc')
-#setopt NO_clobber
+setopt NO_clobber
 
 ## don't warn me about bg processes when exiting
-#setopt nocheckjobs
+setopt nocheckjobs
 
 ## alert me if something failed
-#setopt printexitvalue
+setopt printexitvalue
 
 ## with spelling correction, assume dvorak kb
 #setopt dvorak
 
 ## Allow comments even in interactive shells
-#setopt interactivecomments
+setopt interactivecomments
 
 
 ## compsys related snippets ##
@@ -169,8 +168,8 @@ fi
 
 ## global aliases (for those who like them) ##
 
-#alias -g '...'='../..'
-#alias -g '....'='../../..'
+alias -g '...'='../..'
+alias -g '....'='../../..'
 #alias -g BG='& exit'
 #alias -g C='|wc -l'
 #alias -g G='|grep'
@@ -185,7 +184,7 @@ fi
 #alias -g SL='| sort | less'
 #alias -g S='| sort'
 #alias -g T='|tail'
-#alias -g V='| vim -'
+#alias -g V='| nvim -'
 
 ## instead of global aliase it might be better to use grmls $abk assoc array, whose contents are expanded after pressing ,.
 #$abk[SnL]="| sort -n | less"
@@ -205,25 +204,25 @@ fi
 #export MANWIDTH=${MANWIDTH:-80}
 
 ## Set a search path for the cd builtin
-#cdpath=(.. ~)
+cdpath=(.. ~)
 
 ## variation of our manzsh() function; pick you poison:
-#manzsh()  { /usr/bin/man zshall |  most +/"$1" ; }
+manzsh()  { /usr/bin/man zshall |  most +/"$1" ; }
 
 ## Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
-#bash() {
-#    NO_SWITCH="yes" command bash "$@"
-#}
-#restart () {
-#    exec $SHELL $SHELL_ARGS "$@"
-#}
+bash() {
+    NO_SWITCH="yes" command bash "$@"
+}
+restart () {
+    exec $SHELL $SHELL_ARGS "$@"
+}
 
 ## Handy functions for use with the (e::) globbing qualifier (like nt)
-#contains() { grep -q "$*" $REPLY }
-#sameas() { diff -q "$*" $REPLY &>/dev/null }
-#ot () { [[ $REPLY -ot ${~1} ]] }
+contains() { grep -q "$*" $REPLY }
+sameas() { diff -q "$*" $REPLY &>/dev/null }
+ot () { [[ $REPLY -ot ${~1} ]] }
 
-## get_ic() - queries imap servers for capabilities; real simple. no imaps
+# get_ic() - queries imap servers for capabilities; real simple. no imaps
 #ic_get() {
 #    emulate -L zsh
 #    local port
@@ -236,69 +235,69 @@ fi
 #    fi
 #}
 
-## List all occurrences of programm in current PATH
-#plap() {
-#    emulate -L zsh
-#    if [[ $# = 0 ]] ; then
-#        echo "Usage:    $0 program"
-#        echo "Example:  $0 zsh"
-#        echo "Lists all occurrences of program in the current PATH."
-#    else
-#        ls -l ${^path}/*$1*(*N)
-#    fi
-#}
+# List all occurrences of programm in current PATH
+plap() {
+    emulate -L zsh
+    if [[ $# = 0 ]] ; then
+        echo "Usage:    $0 program"
+        echo "Example:  $0 zsh"
+        echo "Lists all occurrences of program in the current PATH."
+    else
+        ls -l ${^path}/*$1*(*N)
+    fi
+}
 
-## Find out which libs define a symbol
-#lcheck() {
-#    if [[ -n "$1" ]] ; then
-#        nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
-#    else
-#        echo "Usage: lcheck <function>" >&2
-#    fi
-#}
+# Find out which libs define a symbol
+lcheck() {
+    if [[ -n "$1" ]] ; then
+        nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
+    else
+        echo "Usage: lcheck <function>" >&2
+    fi
+}
 
 ## Download a file and display it locally
-#uopen() {
-#    emulate -L zsh
-#    if ! [[ -n "$1" ]] ; then
-#        print "Usage: uopen \$URL/\$file">&2
-#        return 1
-#    else
-#        FILE=$1
-#        MIME=$(curl --head $FILE | \
-#               grep Content-Type | \
-#               cut -d ' ' -f 2 | \
-#               cut -d\; -f 1)
-#        MIME=${MIME%$'\r'}
-#        curl $FILE | see ${MIME}:-
-#    fi
-#}
+uopen() {
+    emulate -L zsh
+    if ! [[ -n "$1" ]] ; then
+        print "Usage: uopen \$URL/\$file">&2
+        return 1
+    else
+        FILE=$1
+        MIME=$(curl --head $FILE | \
+               grep Content-Type | \
+               cut -d ' ' -f 2 | \
+               cut -d\; -f 1)
+        MIME=${MIME%$'\r'}
+        curl $FILE | see ${MIME}:-
+    fi
+}
 
-## Memory overview
-#memusage() {
-#    ps aux | awk '{if (NR > 1) print $5;
-#                   if (NR > 2) print "+"}
-#                   END { print "p" }' | dc
-#}
+# Memory overview
+memusage() {
+    ps aux | awk '{if (NR > 1) print $5;
+                   if (NR > 2) print "+"}
+                   END { print "p" }' | dc
+}
 
-## print hex value of a number
-#hex() {
-#    emulate -L zsh
-#    if [[ -n "$1" ]]; then
-#        printf "%x\n" $1
-#    else
-#        print 'Usage: hex <number-to-convert>'
-#        return 1
-#    fi
-#}
+# print hex value of a number
+hex() {
+    emulate -L zsh
+    if [[ -n "$1" ]]; then
+        printf "%x\n" $1
+    else
+        print 'Usage: hex <number-to-convert>'
+        return 1
+    fi
+}
 
-## log out? set timeout in seconds...
-## ...and do not log out in some specific terminals:
-#if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|screen*) ]] ; then
-#    unset TMOUT
-#else
-#    TMOUT=1800
-#fi
+# log out? set timeout in seconds...
+# ...and do not log out in some specific terminals:
+if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|screen*) ]] ; then
+    unset TMOUT
+else
+    TMOUT=1800
+fi
 
 ## associate types and extensions (be aware with perl scripts and anwanted behaviour!)
 #check_com zsh-mime-setup || { autoload zsh-mime-setup && zsh-mime-setup }
@@ -326,10 +325,16 @@ fi
 #getanchors () { perl -ne 'while ( m/«([^«»\n]+)»/gc ) { print $1, "\n"; }' $* }
 #showINC ()    { perl -e 'for (@INC) { printf "%d %s\n", $i++, $_ }' }
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
-#vimhelp ()    { vim -c "help $1" -c on -c "au! VimEnter *" }
+vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
 
+EDITOR=nvim
+
+alias nvimdiff="nvim -d"
+alias vimdiff="nvim -d"
 alias addvid="sudo modprobe uvcvideo"
 alias rmvid="sudo modprobe -r uvcvideo"
 screenfetch
+
+
