@@ -177,7 +177,7 @@ alias -g '....'='../../..'
 cdpath=(.. ~)
 
 ## variation of our manzsh() function; pick you poison:
-manzsh()  { /usr/bin/man zshall |  most +/"$1" ; }
+manzsh()  { /usr/bin/man zshall |  $PAGER +/"$1" ; }
 
 ## Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
 bash() {
@@ -264,9 +264,9 @@ fi
 #stty erase "^?"
 
 ## you want to automatically use a bigger font on big terminals?
-if [[ "$TERM" == "xterm" ]] && [[ "$LINES" -ge 50 ]] && [[ "$COLUMNS" -ge 100 ]] && [[ -z "$SSH_CONNECTION" ]] ; then
-   large
-fi
+#if [[ "$TERM" == "xterm" ]] && [[ "$LINES" -ge 50 ]] && [[ "$COLUMNS" -ge 100 ]] && [[ -z "$SSH_CONNECTION" ]] ; then
+#    large
+#fi
 
 ## Some quick Perl-hacks aka /useful/ oneliner
 #bew() { perl -le 'print unpack "B*","'$1'"' }
