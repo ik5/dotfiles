@@ -46,4 +46,4 @@
 [url "git@github.com:"]
 	insteadOf = https://github.com:443/
 [help]
-autocorrect = 1
+  autocorrect = 1
