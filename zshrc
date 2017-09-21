@@ -1,5 +1,17 @@
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-#source $HOME/antigen.zsh
+# Test for an interactive shell.  There is no need to set anything
+# past this point for scp and rcp, and it's important to refrain from
+# outputting anything in those cases.
+if [[ $- != *i* ]] ; then
+	# Shell is non-interactive.  Be done now!
+	return
+fi
+
+
+# The following lines were added by compinstall
+zstyle :compinstall filename '/home/ik/.zshrc'
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
 
 if [ ! -z $GOPATH ]; then
   export GOPATH="$HOME/projects/go_resources/:$GOPATH"
@@ -53,11 +65,11 @@ bindkey -M menuselect 'l' vi-forward-char         # right
 bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
 ## set command prediction from history, see 'man 1 zshcontrib'
-#is4 && zrcautoload predict-on && \
-#zle -N predict-on         && \
-#zle -N predict-off        && \
-#bindkey "^X^Z" predict-on && \
-#bindkey "^Z^X" predict-off
+is4 && zrcautoload predict-on && \
+zle -N predict-on         && \
+zle -N predict-off        && \
+bindkey "^X^Z" predict-on && \
+bindkey "^Z^X" predict-off
 
 ## press ctrl-q to quote line:
 mquote () {
@@ -110,37 +122,9 @@ setopt nocheckjobs
 ## alert me if something failed
 setopt printexitvalue
 
-## with spelling correction, assume dvorak kb
-#setopt dvorak
-
 ## Allow comments even in interactive shells
 setopt interactivecomments
 
-
-## compsys related snippets ##
-
-## changed completer settings
-#zstyle ':completion:*' completer _complete _correct _approximate
-#zstyle ':completion:*' expand prefix suffix
-
-## another different completer setting: expand shell aliases
-#zstyle ':completion:*' completer _expand_alias _complete _approximate
-
-## to have more convenient account completion, specify your logins:
-#my_accounts=(
-# {grml,grml1}@foo.invalid
-# grml-devel@bar.invalid
-#)
-#other_accounts=(
-# {fred,root}@foo.invalid
-# vera@bar.invalid
-#)
-#zstyle ':completion:*:my-accounts' users-hosts $my_accounts
-#zstyle ':completion:*:other-accounts' users-hosts $other_accounts
-
-## add grml.org to your list of hosts
-#hosts+=(grml.org)
-#zstyle ':completion:*:hosts' hosts $hosts
 
 ## telnet on non-default ports? ...well:
 ## specify specific port/service settings:
@@ -151,16 +135,8 @@ setopt interactivecomments
 #  @news-server:nntp
 #  @proxy-server:8000
 #)
-#zstyle ':completion:*:*:telnet:*' users-hosts-ports $telnet_users_hosts_ports
-
-## the default grml setup provides '..' as a completion. it does not provide
-## '.' though. If you want that too, use the following line:
-#zstyle ':completion:*' special-dirs true
 
 ## aliases ##
-
-## translate
-#alias u='translate -i'
 
 ## ignore ~/.ssh/known_hosts entries
 #alias insecssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -o "PreferredAuthentications=keyboard-interactive"'
@@ -192,12 +168,6 @@ alias -g '....'='../../..'
 ## get top 10 shell commands:
 #alias top10='print -l ${(o)history%% *} | uniq -c | sort -nr | head -n 10'
 
-## Execute \kbd{./configure}
-#alias CO="./configure"
-
-## Execute \kbd{./configure --help}
-#alias CH="./configure --help"
-
 ## miscellaneous code ##
 
 ## Use a default width of 80 for manpages for more convenient reading
@@ -221,19 +191,6 @@ restart () {
 contains() { grep -q "$*" $REPLY }
 sameas() { diff -q "$*" $REPLY &>/dev/null }
 ot () { [[ $REPLY -ot ${~1} ]] }
-
-# get_ic() - queries imap servers for capabilities; real simple. no imaps
-#ic_get() {
-#    emulate -L zsh
-#    local port
-#    if [[ ! -z $1 ]] ; then
-#        port=${2:-143}
-#        print "querying imap server on $1:${port}...\n";
-#        print "a1 capability\na2 logout\n" | nc $1 ${port}
-#    else
-#        print "usage:\n  $0 <imap-server> [port]"
-#    fi
-#}
 
 # List all occurrences of programm in current PATH
 plap() {
@@ -307,9 +264,9 @@ fi
 #stty erase "^?"
 
 ## you want to automatically use a bigger font on big terminals?
-#if [[ "$TERM" == "xterm" ]] && [[ "$LINES" -ge 50 ]] && [[ "$COLUMNS" -ge 100 ]] && [[ -z "$SSH_CONNECTION" ]] ; then
-#    large
-#fi
+if [[ "$TERM" == "xterm" ]] && [[ "$LINES" -ge 50 ]] && [[ "$COLUMNS" -ge 100 ]] && [[ -z "$SSH_CONNECTION" ]] ; then
+   large
+fi
 
 ## Some quick Perl-hacks aka /useful/ oneliner
 #bew() { perl -le 'print unpack "B*","'$1'"' }
@@ -325,16 +282,43 @@ fi
 #getanchors () { perl -ne 'while ( m/«([^«»\n]+)»/gc ) { print $1, "\n"; }' $* }
 #showINC ()    { perl -e 'for (@INC) { printf "%d %s\n", $i++, $_ }' }
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
-vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
+# vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
 
 EDITOR=nvim
 
+alias vim="nvim"
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias addvid="sudo modprobe uvcvideo"
 alias rmvid="sudo modprobe -r uvcvideo"
 screenfetch
+
+### Antigen configuration
+. /home/ik/antigen.zsh
+if [[ ! -x antigen-apply ]]; then
+  source /home/ik/antigen.zsh
+fi
+
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle git-flow-avh
+antigen bundle pip
+antigen bundle heroku
+antigen bundle gem
+antigen bundle npm
+antigen bundle command-not-found
+antigen bundle ruby
+antigen bundle go
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle popstas/zsh-command-time
+antigen bundle zsh-users/zsh-completions 
+
+antigen theme ys
+antigen apply
 
 
