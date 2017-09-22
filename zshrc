@@ -5,7 +5,35 @@ if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
 	return
 fi
+#
+### Antigen configuration
+. /home/ik/antigen.zsh
+if [[ ! -x antigen-apply ]]; then
+  source /home/ik/antigen.zsh
+fi
 
+antigen use oh-my-zsh
+
+antigen bundle git
+antigen bundle git-flow-avh
+antigen bundle pip
+antigen bundle heroku
+antigen bundle gem
+antigen bundle npm
+antigen bundle command-not-found
+antigen bundle ruby
+antigen bundle go
+antigen bundle colored-man-pages
+antigen bundle colorize
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen bundle popstas/zsh-command-time
+antigen bundle zsh-users/zsh-completions 
+
+antigen theme ys
+antigen apply
+
+ZSH_COMMAND_TIME_ECHO=1
+ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more 
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ik/.zshrc'
@@ -248,6 +276,21 @@ hex() {
     fi
 }
 
+# from https://gist.github.com/knadh/123bca5cfdae8645db750bfb49cb44b0
+function preexec() {
+  timer=$(($(date +%s%N)/1000000))
+}
+
+function precmd() {
+  if [ $timer ]; then
+    now=$(($(date +%s%N)/1000000))
+    elapsed=$(($now-$timer))
+
+    export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
+    unset timer
+  fi
+}
+
 # log out? set timeout in seconds...
 # ...and do not log out in some specific terminals:
 if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|screen*) ]] ; then
@@ -294,31 +337,5 @@ alias vimdiff="nvim -d"
 alias addvid="sudo modprobe uvcvideo"
 alias rmvid="sudo modprobe -r uvcvideo"
 screenfetch
-
-### Antigen configuration
-. /home/ik/antigen.zsh
-if [[ ! -x antigen-apply ]]; then
-  source /home/ik/antigen.zsh
-fi
-
-antigen use oh-my-zsh
-
-antigen bundle git
-antigen bundle git-flow-avh
-antigen bundle pip
-antigen bundle heroku
-antigen bundle gem
-antigen bundle npm
-antigen bundle command-not-found
-antigen bundle ruby
-antigen bundle go
-antigen bundle colored-man-pages
-antigen bundle colorize
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle popstas/zsh-command-time
-antigen bundle zsh-users/zsh-completions 
-
-antigen theme ys
-antigen apply
 
 
