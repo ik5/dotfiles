@@ -36,7 +36,7 @@ fi
 
 antigen use oh-my-zsh
 
-antigen bundle git
+#antigen bundle git
 antigen bundle git-flow-avh
 antigen bundle pip
 antigen bundle heroku
@@ -354,8 +354,8 @@ fi
 alias vim="nvim"
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
-alias addvid="sudo modprobe uvcvideo"
-alias rmvid="sudo modprobe -r uvcvideo"
+alias vidadd="sudo modprobe uvcvideo"
+alias vidrm="sudo modprobe -r uvcvideo"
 screenfetch
 
 
