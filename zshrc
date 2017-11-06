@@ -27,6 +27,13 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 
+# if you do a 'rm *', Zsh will give you a sanity check!
+setopt RM_STAR_WAIT
+
+# Zsh has a spelling corrector
+setopt CORRECT
+
+
 #
 ### Antigen configuration
 . /home/ik/antigen.zsh
