@@ -10,6 +10,9 @@ fi
 export EDITOR=nvim
 export BROWSER=$(which google-chrome chromium-browser firefox links2 links lynx | grep -Pm1 '^/')
 
+# set to TMUX terminal if we are inside tmux
+[[ $TMUX != "" ]] && export TERM="tmux-256color"
+
 export HISTFILE=/home/ik/.zsh_history
 export HISTSIZE=950000
 export SAVEHIST=950000
