@@ -12,5 +12,6 @@ all:
 	[ - ~/.xinitrc ] || ln -s $(PWD)/xinitrc ~/.xinitrc
 	[ - ~/.xsession ] || ln -s $(PWD)/xsession ~/.xsession
 	[ - ~/.zlogin ] || ln -s $(PWD)/zlogin ~/.zlogin
+	[ - ~/.tmux.conf ] || ln -s $(PWD)/tmux.conf ~/.tmux.conf
 
 .PHONY: all
