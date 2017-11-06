@@ -322,7 +322,7 @@ function precmd() {
 
 # log out? set timeout in seconds...
 # ...and do not log out in some specific terminals:
-if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|screen*) ]] ; then
+if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|tmux|screen*) ]] ; then
     unset TMOUT
 else
     TMOUT=1800
