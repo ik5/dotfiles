@@ -8,10 +8,12 @@ fi
 
 
 export EDITOR=nvim
-export BROWSER=$(which google-chrome chromium-browser firefox links2 links lynx | grep -Pm1 '^/')
+export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
 
 # set to TMUX terminal if we are inside tmux
 [[ $TMUX != "" ]] && export TERM="tmux-256color"
+
+source ~/.bin/tmuxinator.zsh
 
 export HISTFILE=/home/ik/.zsh_history
 export HISTSIZE=950000
@@ -36,6 +38,8 @@ setopt RM_STAR_WAIT
 # Zsh has a spelling corrector
 setopt CORRECT
 
+# do not timeout a session
+unset TMOUT
 
 #
 ### Antigen configuration
@@ -59,13 +63,13 @@ antigen bundle colored-man-pages
 antigen bundle colorize
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle popstas/zsh-command-time
-antigen bundle zsh-users/zsh-completions 
+antigen bundle zsh-users/zsh-completions
 
 antigen theme ys
 antigen apply
 
 ZSH_COMMAND_TIME_ECHO=1
-ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more 
+ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
 
 # The following lines were added by compinstall
 zstyle :compinstall filename '/home/ik/.zshrc'
@@ -322,14 +326,6 @@ function precmd() {
     unset timer
   fi
 }
-
-# log out? set timeout in seconds...
-# ...and do not log out in some specific terminals:
-if [[ "${TERM}" == ([Exa]term*|rxvt|dtterm|tmux|screen*) ]] ; then
-    unset TMOUT
-else
-    TMOUT=1800
-fi
 
 ## associate types and extensions (be aware with perl scripts and anwanted behaviour!)
 #check_com zsh-mime-setup || { autoload zsh-mime-setup && zsh-mime-setup }
