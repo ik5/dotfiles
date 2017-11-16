@@ -20,25 +20,35 @@
 #  ff = false
 #  tool = vimdiff
 [alias]
-  st   = status -sb
-  ci   = commit
-  br   = branch
-  co   = checkout
-  di   = diff
-  df   = diff --color
-  dic  = diff --cached
-  lol = log --graph --decorate --pretty=oneline --abbrev-commit
-  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
-  lg   = log -p --color
-  who  = shortlog -s --
-  lp   = log --graph --pretty=format:'%Cred%h%Creset — %s %Cgreen(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color
-  undo = reset --hard
-  ls   = list-files
-  lsi  = ls-files -o -i --exclude-standard # show ignored ignored
-  up     = !git pull --rebase --prune $@ && git submodule update --init --recursive
-  bclean = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
-  bdone  = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-  pl     = pull --rebase origin master
+  st      = status -sb
+  ci      = commit
+  br      = branch -av
+  co      = checkout
+  di      = diff
+  df      = diff --color
+  dic     = diff --cached
+  lol     = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola    = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  lg      = log -p --color
+  who     = shortlog -s --
+  lp      = log --graph --pretty=format:'%Cred%h%Creset — %s %Cgreen(%cr)%Creset %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative --color
+  undo    = reset --hard
+  ls      = ls-files
+  lsi     = ls-files -o -i --exclude-standard # show ignored ignored
+  up      = !git pull --rebase --prune $@ && git submodule update --init --recursive
+  bclean  = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
+  bdone   = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+  pl      = pull --rebase origin master
+  st      = status -v -u --column --show-stash
+  ai      = add -i
+  # Show all of my configured aliases
+  aliases = !git config --list | grep 'alias\\.' | sed 's/alias\\.\\([^=]*\\)=\\(.*\\)/\\1\\ \t => \\2/' | sort
+  # For when you made that commit a bit too early, amend
+  amend   = !git log -n 1 --pretty=tformat:%s%n%n%b | git commit -F - --amend
+  # Which files are receiving the most "love"
+  churn   = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
+  # Update all submodules
+  subup   = submodule update --init
 [push]
 	default = matching
 [http "https://gopkg.in"]
@@ -47,3 +57,10 @@
 	insteadOf = https://github.com:443/
 [help]
   autocorrect = 1
+[web]
+  browser = firefox
+[rerere]
+	enabled = 1
+  autoupdate = 1
+[difftool]
+  prompt = true
