@@ -4,7 +4,7 @@
 [core]
 	editor = nvim
   excludesfile = /home/ik/.gitignore
-  pager = less -x2 -R
+  # pager = less -x2 -R
   quotepath = false
   precomposeunicode = true
   logAllRefUpdates = true
