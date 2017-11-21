@@ -77,9 +77,7 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-if [ "$GOPATH" != "" ]; then
-  export GOPATH="$HOME/projects/go_resources/:$GOPATH"
-else
+if [ "$GOPATH" == "" ]; then
   export GOPATH="$HOME/projects/go_resources/"
 fi
 
