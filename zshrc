@@ -77,12 +77,11 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-if [ "$GOPATH" == "" ]; then
+if [[ "$GOPATH" == "" ]]; then
   export GOPATH="$HOME/projects/go_resources/"
 fi
 
 export GOROOT=/usr/lib/go/
-export PATH="$HOME/.gem/ruby/2.4.0/bin:$GOPATH/bin/:$PATH"
 
 alias ls='ls --color=always'
 alias ll='ls -lh'
@@ -354,6 +353,23 @@ function precmd() {
 # vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
 
 ## END OF FILE #################################################################
+
+export PATH="$HOME/.gem/ruby/2.4.0/bin:$GOPATH/bin/:$PATH"
+
+if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
+  source /etc/profile.d/emscripten.sh
+fi
+
+# execute android's path scripts
+for f in `/bin/ls /etc/profile.d/android-*.sh`; do
+  source $f
+done
+
+if [[ -e $ANDROID_HOME ]]; then
+  if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
+    PATH=$ANDROID_HOME/tools/bin:$PATH
+  fi
+fi
 
 alias vim="nvim"
 alias nvimdiff="nvim -d"
