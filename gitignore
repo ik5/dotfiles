@@ -14,3 +14,4 @@ tmp/*
 .ropeproject/*
 */node_modules/*
 node_modules/*
+.tern-port
