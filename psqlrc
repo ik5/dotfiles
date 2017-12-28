@@ -1,10 +1,10 @@
 \timing
 \set PROMPT1 '%M:%> %n@%~%R%#%x '
-\set PROMPT2 '%M %n@%~%R %# '
+\set PROMPT2 '... %R> '
 \set ON_ERROR_ROLLBACK interactive
 \set COMP_KEYWORD_CASE upper
 \set HISTSIZE 50000
-\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTFILE ~/tmp/psql-history/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
 \set VERBOSITY verbose
 
