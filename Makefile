@@ -13,5 +13,6 @@ all:
 	[ - ~/.xsession ] || ln -s $(PWD)/xsession ~/.xsession
 	[ - ~/.zlogin ] || ln -s $(PWD)/zlogin ~/.zlogin
 	[ - ~/.tmux.conf ] || ln -s $(PWD)/tmux.conf ~/.tmux.conf
+	[ - ~/.psqlrc ] || ln -s $(PWD)/psqlrc ~/.psqlrc
 
 .PHONY: all

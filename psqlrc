@@ -1,0 +1,14 @@
+\timing
+\set PROMPT1 '%M:%> %n@%~%R%#%x '
+\set PROMPT2 '%M %n@%~%R %# '
+\set ON_ERROR_ROLLBACK interactive
+\set COMP_KEYWORD_CASE upper
+\set HISTSIZE 50000
+\set HISTFILE ~/.psql_history- :DBNAME
+\set HISTCONTROL ignoredups
+\set VERBOSITY verbose
+
+\pset pager off
+\pset null '[__null__]'
+
+\x auto
