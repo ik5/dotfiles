@@ -1,6 +1,6 @@
 [user]
-	name = ik5
-	email = idok@linesip.com
+	name = Ido Kanner
+	email = ikanner@redhat.com
 [core]
 	editor = nvim
   excludesfile = /home/ik/.gitignore
@@ -38,7 +38,7 @@
   up      = !git pull --rebase --prune $@ && git submodule update --init --recursive
   bclean  = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone   = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
-  pl      = pull --rebase origin master
+  pl      = pull --rebase
   st      = status -v -u --column --show-stash
   ai      = add -i
   # Show all of my configured aliases
