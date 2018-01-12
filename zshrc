@@ -354,14 +354,12 @@ function precmd() {
 
 ## END OF FILE #################################################################
 
-export PATH="$HOME/.gem/ruby/2.4.0/bin:$GOPATH/bin/:$PATH"
-
 if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
   source /etc/profile.d/emscripten.sh
 fi
 
 # execute android's path scripts
-for f in `/bin/ls /etc/profile.d/android-*.sh`; do
+for f in `/etc/profile.d/android-*.sh`; do
   source $f
 done
 
@@ -369,6 +367,19 @@ if [[ -e $ANDROID_HOME ]]; then
   if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
     PATH=$ANDROID_HOME/tools/bin:$PATH
   fi
+fi
+
+export PATH=$GOPATH/bin/:$PATH
+
+rbV4=$HOME/.gem/ruby/2.4.0/bin
+rbV5=$HOME/.gem/ruby/2.5.0/bin
+
+if [[ -d $rbV4  ]]; then
+  PATH=$rbV4:$PATH
+fi
+
+if [[ -d $rbV5  ]]; then
+  PATH=$rbV5:$PATH
 fi
 
 alias vim="nvim"
