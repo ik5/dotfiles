@@ -1,6 +1,6 @@
 [user]
 	name = Ido Kanner
-	email = ikanner@redhat.com
+	email = idok@linesip.com
 [core]
 	editor = nvim
   excludesfile = /home/ik/.gitignore

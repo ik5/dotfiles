@@ -15,4 +15,5 @@ tmp/*
 */node_modules/*
 node_modules/*
 .tern-port
+vendor/*
 .byebug_history
