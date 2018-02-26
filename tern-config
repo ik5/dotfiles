@@ -1,0 +1,27 @@
+{
+    "libs": [
+        "browser",
+        "jquery",
+        "ecma6",
+        "jsx"
+    ],
+    "loadEagerly": [
+        "src/**/*.js",
+        "src/**/*.jsx"
+    ],
+    "dontLoad": [
+        "lib/**/*.js",
+        "lib/**/*.jsx"
+    ],
+    "plugins": {
+        "requirejs": {
+            "baseURL": "./",
+            "paths": {}
+        },
+        "node": {},
+        "complete_strings": {},
+        "modules": {},
+        "es_modules": {},
+        "webpack": {}
+    }
+}
