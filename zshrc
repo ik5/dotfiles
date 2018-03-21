@@ -390,3 +390,5 @@ alias vidrm="sudo modprobe -r uvcvideo"
 screenfetch
 
 
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
