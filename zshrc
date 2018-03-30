@@ -382,7 +382,7 @@ if [[ -d $rbV5  ]]; then
   PATH=$rbV5:$PATH
 fi
 
-alias vim="nvim"
+# alias vim="nvim"
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
