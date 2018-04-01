@@ -66,4 +66,10 @@
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[transfer]
+	fsckobjects = true
+[fetch]
+	fsckobjects = true
+[receive]
+  fsckobjects = true
 
