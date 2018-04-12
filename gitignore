@@ -17,3 +17,4 @@ node_modules/*
 .tern-port
 vendor/*
 .byebug_history
+package-lock.json
