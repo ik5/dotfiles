@@ -10,6 +10,7 @@ fi
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
+export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
 
 # set to TMUX terminal if we are inside tmux
 [[ $TMUX != "" ]] && export TERM="tmux-256color"
