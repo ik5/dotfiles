@@ -13,7 +13,7 @@ export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx 
 export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
 
 # set to TMUX terminal if we are inside tmux
-[[ $TMUX != "" ]] && export TERM="tmux-256color"
+[[ $TMUX != "" ]] && export TERM="screen-256color"
 
 source ~/.bin/tmuxinator.zsh
 
