@@ -1,6 +1,7 @@
 [user]
 	name = Ido Kanner
-	email = idok@linesip.com
+	email = ikanner@redhat.com
+	signingkey = D9941CFE80771D5ABD1C45FCEE8AFD265D603466
 [core]
 	editor = nvim
   excludesfile = /home/ik/.gitignore
@@ -72,4 +73,3 @@
 	fsckobjects = true
 [receive]
   fsckobjects = true
-

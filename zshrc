@@ -6,11 +6,14 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+# Path to your oh-my-zsh installation.
+export ZSH=/home/ik/.oh-my-zsh
+source $ZSH/oh-my-zsh.sh
 
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
-export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
+export TERMINAL=$(which tilix terminator xterm rxvt | grep -Pm1 '^/' )
 
 # set to TMUX terminal if we are inside tmux
 [[ $TMUX != "" ]] && export TERM="screen-256color"
@@ -56,10 +59,11 @@ antigen use oh-my-zsh
 antigen bundle git-flow-avh
 antigen bundle pip
 antigen bundle heroku
-antigen bundle gem
 antigen bundle npm
 antigen bundle command-not-found
 antigen bundle ruby
+antigen bundle gem
+antigen bundle rvm
 antigen bundle go
 antigen bundle colored-man-pages
 antigen bundle colorize
@@ -79,11 +83,17 @@ autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
-if [[ "$GOPATH" == "" ]]; then
-  export GOPATH="$HOME/projects/go_resources/"
+`which go 2>&1 > /dev/null`
+if [[ $? == 0 ]]; then
+  if [[ "$GOPATH" == "" ]]; then
+    export GOPATH="$HOME/projects/go_resources/"
+  fi
+  if [[ -d "/usr/lib/golang/" ]]; then
+    export GOROOT=/usr/lib/golang/
+  elif [[ -d "/usr/lib/go/" ]]; then
+    export GOROOT=/usr/lib/go/
+  fi
 fi
-
-export GOROOT=/usr/lib/go/
 
 alias ls='ls --color=always'
 alias ll='ls -lh'
@@ -127,8 +137,13 @@ bindkey -M menuselect 'k' vi-up-line-or-history   # up
 bindkey -M menuselect 'l' vi-forward-char         # right
 bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
+function is4 () {
+  [[ $ZSH_VERSION == <4->* ]] && return 0
+  return 1
+}
+
 ## set command prediction from history, see 'man 1 zshcontrib'
-is4 && zrcautoload predict-on && \
+#is4 && zrcautoload predict-on && \
 zle -N predict-on         && \
 zle -N predict-off        && \
 bindkey "^X^Z" predict-on && \
@@ -188,7 +203,6 @@ setopt printexitvalue
 ## Allow comments even in interactive shells
 setopt interactivecomments
 
-
 ## telnet on non-default ports? ...well:
 ## specify specific port/service settings:
 #telnet_users_hosts_ports=(
@@ -203,7 +217,6 @@ setopt interactivecomments
 
 ## ignore ~/.ssh/known_hosts entries
 #alias insecssh='ssh -o "StrictHostKeyChecking=no" -o "UserKnownHostsFile=/dev/null" -o "PreferredAuthentications=keyboard-interactive"'
-
 
 ## global aliases (for those who like them) ##
 
@@ -326,6 +339,16 @@ function precmd() {
   fi
 }
 
+# function vim() {
+  # echo 'Execute vim function, please avoid using it'
+  # sleep 0.9
+  # if [ -e /usr/bin/nvim ]; then
+  #   /usr/bin/nvim $@
+  # elif [ -e /usr/bin/vim ]; then
+  #   /usr/bin/vim $@
+  # fi
+# }
+
 ## associate types and extensions (be aware with perl scripts and anwanted behaviour!)
 #check_com zsh-mime-setup || { autoload zsh-mime-setup && zsh-mime-setup }
 #alias -s pl='perl -S'
@@ -356,23 +379,28 @@ function precmd() {
 
 ## END OF FILE #################################################################
 
+export PATH="$GOPATH/bin/:$PATH"
+
 if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
   source /etc/profile.d/emscripten.sh
 fi
 
-# execute android's path scripts
-for f in `/etc/profile.d/android-*.sh`; do
-  source $f
-done
-
-if [[ -e $ANDROID_HOME ]]; then
-  if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
-    PATH=$ANDROID_HOME/tools/bin:$PATH
-  fi
+if [[ -e '/usr/share/jruby/bin/' ]]; then
+  export PATH=/usr/share/jruby/bin:$PATH
 fi
 
-export PATH=$GOPATH/bin/:$PATH
+# execute android's path scripts
+# for f in /etc/profile.d/android-*.sh; do
+#   source $f
+# done
+#
+# if [[ -e "$ANDROID_HOME" ]]; then
+#   if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
+#     PATH=$ANDROID_HOME/tools/bin:$PATH
+#   fi
+# fi
 
+rbGen=$HOME/.gem/bin
 rbV4=$HOME/.gem/ruby/2.4.0/bin
 rbV5=$HOME/.gem/ruby/2.5.0/bin
 
@@ -384,13 +412,17 @@ if [[ -d $rbV5  ]]; then
   PATH=$rbV5:$PATH
 fi
 
-# alias vim="nvim"
+if [[ -d $rbGen ]]; then
+  PATH=$rbGen:$PATH
+fi
+
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
+
+[[ "$DESKTOP_SESSION" != "" ]] && echo "\e[33;1mRunning:\e[0m \e[4m$DESKTOP_SESSION\e[0m"
 screenfetch
 
-
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
