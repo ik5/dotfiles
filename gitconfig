@@ -17,6 +17,8 @@
   ui = auto
   diff = auto
   grep = auto
+[color "status"]
+  untracked = cyan bold
 #[merge]
 #  ff = false
 #  tool = vimdiff
