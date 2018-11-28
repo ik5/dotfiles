@@ -394,3 +394,6 @@ screenfetch
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# added by travis gem
+[ -f /home/ik/.travis/travis.sh ] && source /home/ik/.travis/travis.sh

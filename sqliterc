@@ -1,0 +1,6 @@
+.headers on      -- show column names
+.mode column     -- show results in column format
+.timer on        -- show execution time after each query
+.explain on      -- show EPLAIN output mode
+.nullvalue "¤"   -- show null value
+.width -4        -- Set column widths for "column" mode
