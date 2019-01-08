@@ -392,8 +392,11 @@ alias vidrm="sudo modprobe -r uvcvideo"
 screenfetch
 
 
-
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
 [ -f /home/ik/.travis/travis.sh ] && source /home/ik/.travis/travis.sh
+
+export WORKON_HOME=$HOME/.venv
+export PROJECT_HOME=$HOME/projects
+. /usr/bin/virtualenvwrapper.sh
