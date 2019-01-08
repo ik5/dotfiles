@@ -93,6 +93,7 @@ alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias mnt='mount | column -t'
+alias gomod='GO111MODULE=on go'
 
 if [ -f $HOME/.zshrc.private ]; then
   # loading private stuff that should not be on github
