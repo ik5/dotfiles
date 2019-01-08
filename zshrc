@@ -84,6 +84,7 @@ if [[ "$GOPATH" == "" ]]; then
 fi
 
 export GOROOT=/usr/lib/go/
+export GO111MODULE=yes
 
 alias ls='ls --color=always'
 alias ll='ls -lh'
