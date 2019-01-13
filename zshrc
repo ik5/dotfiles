@@ -381,16 +381,20 @@ fi
 
 export PATH=$GOPATH/bin/:$PATH
 
-rbV4=$HOME/.gem/ruby/2.4.0/bin
-rbV5=$HOME/.gem/ruby/2.5.0/bin
+# Add the latest Ruby gems bin path installed locally
+rbPATH=(
+"$HOME/.gem/ruby/2.6.0/bin"
+"$HOME/.gem/ruby/2.5.0/bin"
+"$HOME/.gem/ruby/2.4.0/bin"
+"$HOME/.gem/ruby/2.3.0/bin"
+)
 
-if [[ -d $rbV4  ]]; then
-  PATH=$rbV4:$PATH
-fi
-
-if [[ -d $rbV5  ]]; then
-  PATH=$rbV5:$PATH
-fi
+for i in "${rbPATH[@]}"; do
+  if [[ -d "$i" ]]; then
+    PATH=$i:$PATH
+    break
+  fi
+done
 
 # alias vim="nvim"
 alias nvimdiff="nvim -d"
