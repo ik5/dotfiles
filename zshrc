@@ -15,7 +15,13 @@ export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm
 # set to TMUX terminal if we are inside tmux
 [[ $TMUX != "" ]] && export TERM="screen-256color"
 
-source ~/.bin/tmuxinator.zsh
+# fix n a new ruby version installed
+if [[ -e ~/.bin/tmuxinator.zsh ]]; then
+  source ~/.bin/tmuxinator.zsh
+else
+  (>&2 echo "\e[1mWARNING:\e[0m \e[93m\e[101mCould not find \e[1m\e[4m$HOME/.bin/tmuxinator.zsh\e[21m\e[24m.\e[0m")
+fi
+
 
 export HISTFILE=/home/ik/.zsh_history
 export HISTSIZE=950000
