@@ -297,7 +297,7 @@ uopen() {
                cut -d ' ' -f 2 | \
                cut -d\; -f 1)
         MIME=${MIME%$'\r'}
-        curl $FILE | see ${MIME}:-
+        curl $FILE | xdg-open ${MIME}:-
     fi
 }
 
