@@ -284,23 +284,6 @@ lcheck() {
     fi
 }
 
-## Download a file and display it locally
-uopen() {
-    emulate -L zsh
-    if ! [[ -n "$1" ]] ; then
-        print "Usage: uopen \$URL/\$file">&2
-        return 1
-    else
-        FILE=$1
-        MIME=$(curl --head $FILE | \
-               grep Content-Type | \
-               cut -d ' ' -f 2 | \
-               cut -d\; -f 1)
-        MIME=${MIME%$'\r'}
-        curl $FILE | xdg-open ${MIME}:-
-    fi
-}
-
 # Memory overview
 memusage() {
     ps aux | awk '{if (NR > 1) print $5;
