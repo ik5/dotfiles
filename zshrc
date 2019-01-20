@@ -307,12 +307,28 @@ function preexec() {
   timer=$(($(date +%s%N)/1000000))
 }
 
+function human_readable_ms {
+  local MS=$1
+  local Ss="$((MS/1000))"
+  local S="$((Ss % 60))"
+  local M="$((Ss/60%60))"
+  local H="$((Ss/60/60%24))"
+  local D="$((Ss/60/60/24))"
+  [[ $D > 0 ]] && printf '%dd ' $D
+  [[ $H > 0 ]] && printf '%dh ' $H
+  [[ $M > 0 ]] && printf '%dm ' $M
+  [[ $D > 0 || $H > 0 || $M > 0 && $S > 0 ]] && printf 'and '
+  printf '%ds ' $S
+  printf '(%dms)' $MS
+}
+
 function precmd() {
   if [ $timer ]; then
     now=$(($(date +%s%N)/1000000))
     elapsed=$(($now-$timer))
+    human=$(human_readable_ms elapsed)
 
-    export RPROMPT="%F{cyan}${elapsed}ms %{$reset_color%}"
+    export RPROMPT="%F{cyan}${human} %{$reset_color%}"
     unset timer
   fi
 }
