@@ -334,6 +334,18 @@ function precmd() {
   fi
 }
 
+# create a directory and enter to it
+# if parent directory does not exists, it creates it as well
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Usage: $0 <dir name>"
+  elif [ -d $1 ]; then
+    (>&2 echo "\`$1' already exists")
+  else
+    mkdir -p $1 && cd $1
+  fi
+}
+
 ## associate types and extensions (be aware with perl scripts and anwanted behaviour!)
 #check_com zsh-mime-setup || { autoload zsh-mime-setup && zsh-mime-setup }
 #alias -s pl='perl -S'
