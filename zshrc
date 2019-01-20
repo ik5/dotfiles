@@ -288,7 +288,7 @@ lcheck() {
 memusage() {
     ps aux | awk '{if (NR > 1) print $5;
                    if (NR > 2) print "+"}
-                   END { print "p" }' | dc
+                   END { print "p" }' | dc | numfmt --to=iec-i --suffix=B
 }
 
 # print hex value of a number
