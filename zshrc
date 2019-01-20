@@ -345,6 +345,16 @@ function mkcd {
   fi
 }
 
+# Get to the top of a git tree
+function gcdrt () {
+  # from https://github.com/nibalizer/bash-tricks/
+  TEMP_PWD=`pwd`
+  while ! [ -d .git ]; do
+  cd ..
+  done
+  OLDPWD=$TEMP_PWD
+}
+
 ## associate types and extensions (be aware with perl scripts and anwanted behaviour!)
 #check_com zsh-mime-setup || { autoload zsh-mime-setup && zsh-mime-setup }
 #alias -s pl='perl -S'
