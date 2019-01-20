@@ -335,7 +335,7 @@ function precmd() {
 
 # create a directory and enter to it
 # if parent directory does not exists, it creates it as well
-function mkcd {
+function mkthencd {
   if [ ! -n "$1" ]; then
     echo "Usage: $0 <dir name>"
   elif [ -d $1 ]; then
@@ -343,6 +343,17 @@ function mkcd {
   else
     mkdir -p $1 && cd $1
   fi
+}
+
+# create a directory and enters it
+# if the directory already exists, just enters it
+function mkcd {
+  if [ ! -n "$1" ]; then
+    echo "Usage: $0 <dir name>"
+    return
+  fi
+
+  mkdir -p $1 && cd $1
 }
 
 # Get to the top of a git tree
