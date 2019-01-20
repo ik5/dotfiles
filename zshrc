@@ -317,7 +317,7 @@ function human_readable_ms {
   [[ $D > 0 ]] && printf '%dd ' $D
   [[ $H > 0 ]] && printf '%dh ' $H
   [[ $M > 0 ]] && printf '%dm ' $M
-  [[ $D > 0 || $H > 0 || $M > 0 && $S > 0 ]] && printf 'and '
+  # [[ $D > 0 || $H > 0 || $M > 0 && $S > 0 ]] && printf 'and '
   printf '%ds ' $S
   printf '(%dms)' $MS
 }
