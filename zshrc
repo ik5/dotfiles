@@ -379,10 +379,10 @@ function gcdrt () {
 #fi
 
 ## Some quick Perl-hacks aka /useful/ oneliner
-#bew() { perl -le 'print unpack "B*","'$1'"' }
-#web() { perl -le 'print pack "B*","'$1'"' }
-#hew() { perl -le 'print unpack "H*","'$1'"' }
-#weh() { perl -le 'print pack "H*","'$1'"' }
+bew() { perl -le 'print unpack "B*","'$1'"' }
+web() { perl -le 'print pack "B*","'$1'"' }
+hew() { perl -le 'print unpack "H*","'$1'"' }
+weh() { perl -le 'print pack "H*","'$1'"' }
 #pversion()    { perl -M$1 -le "print $1->VERSION" } # i. e."pversion LWP -> 5.79"
 #getlinks ()   { perl -ne 'while ( m/"((www|ftp|http):\/\/.*?)"/gc ) { print $1, "\n"; }' $* }
 #gethrefs ()   { perl -ne 'while ( m/href="([^"]*)"/gc ) { print $1, "\n"; }' $* }
@@ -394,7 +394,6 @@ function gcdrt () {
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
 # vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
 
-## END OF FILE #################################################################
 
 if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
   source /etc/profile.d/emscripten.sh
