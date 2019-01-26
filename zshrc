@@ -411,7 +411,11 @@ if [[ -e $ANDROID_HOME ]]; then
   fi
 fi
 
-export PATH=$GOPATH/bin/:$PATH
+export PATH=${GOPATH}bin/:$PATH
+
+# expprt the default settings for GOOS and GOARCH, I use them inside (n)vim
+export GOOS=$(go env GOOS)
+export GOARCH=$(go env GOARCH)
 
 # Add the latest Ruby gems bin path installed locally
 rbPATH=(
