@@ -417,17 +417,10 @@ export PATH=${GOPATH}bin/:$PATH
 export GOOS=$(go env GOOS)
 export GOARCH=$(go env GOARCH)
 
-# Add the latest Ruby gems bin path installed locally
-rbPATH=(
-"$HOME/.gem/ruby/2.6.0/bin"
-"$HOME/.gem/ruby/2.5.0/bin"
-"$HOME/.gem/ruby/2.4.0/bin"
-"$HOME/.gem/ruby/2.3.0/bin"
-)
-
-for i in "${rbPATH[@]}"; do
-  if [[ -d "$i" ]]; then
-    PATH=$i:$PATH
+for i in $(seq 6 -1 3); do
+  gempath="$HOME/.gem/ruby/2.$i.0/bin"
+  if [[ -d "$gempath" ]]; then
+    PATH=$gempath:$PATH
     break
   fi
 done
