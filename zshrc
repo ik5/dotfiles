@@ -117,6 +117,10 @@ alias fgrep='fgrep --color=auto'
 alias mnt='mount | column -t'
 alias gomod='GO111MODULE=on go'
 
+if [[ "$OS" == "macosx" && -f /usr/local/bin/gdate ]]; then
+  alias date="/usr/local/bin/gdate"
+fi
+
 if [ -f $HOME/.zshrc.private ]; then
   # loading private stuff that should not be on github
   source $HOME/.zshrc.private
