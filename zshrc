@@ -449,7 +449,7 @@ alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
 
-`which screenfetch`
+`which screenfetch 2>&1 > /dev/null`
 [[ $? -eq 0 ]] && screenfetch
 
 
