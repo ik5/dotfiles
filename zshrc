@@ -6,6 +6,17 @@ if [[ $- != *i* ]] ; then
 	return
 fi
 
+if [[ "$OSTYPE" == "linux-gnu" ]]; then
+  export OS="linux"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  export OS="macosx"
+elif [[ "$OSTYPE" == "cygwin" ]]; then
+  export OS="cygwin"
+elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "win32"  ]]; then
+  export OS="windows"
+elif [[ "$OSTYPE" == "freebsd"* ]]; then
+  export OS="bsd"
+fi
 
 export EDITOR=nvim
 export VISUAL=nvim
@@ -23,7 +34,7 @@ else
 fi
 
 
-export HISTFILE=/home/ik/.zsh_history
+export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=950000
 export SAVEHIST=950000
 setopt BANG_HIST                 # Treat the '!' character specially during expansion.
@@ -51,9 +62,9 @@ unset TMOUT
 
 #
 ### Antigen configuration
-. /home/ik/antigen.zsh
+. $HOME/antigen.zsh
 if [[ ! -x antigen-apply ]]; then
-  source /home/ik/antigen.zsh
+  source $HOME/antigen.zsh
 fi
 
 antigen use oh-my-zsh
@@ -80,19 +91,24 @@ ZSH_COMMAND_TIME_ECHO=1
 ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
 
 # The following lines were added by compinstall
-zstyle :compinstall filename '/home/ik/.zshrc'
+zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
 compinit
 # End of lines added by compinstall
 
 if [[ "$GOPATH" == "" ]]; then
+  mkdir -p $HOME/projects/go_resources/
   export GOPATH="$HOME/projects/go_resources/"
 fi
 
 export GOROOT=/usr/lib/go/
 export GO111MODULE=auto
 
-alias ls='ls --color=always'
+if [[ "$OS" == "linux" ]]; then
+  alias ls='ls --color=always'
+elif [[ "$OS" == "macosx" || "$OS" == "bsd" ]]; then
+  alias ls='ls -G'
+fi
 alias ll='ls -lh'
 alias lla='ll -A'
 alias grep='grep --color=auto'
@@ -424,14 +440,16 @@ alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
-screenfetch
+
+`which screenfetch`
+[[ $? -eq 0 ]] && screenfetch
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
-[ -f /home/ik/.travis/travis.sh ] && source /home/ik/.travis/travis.sh
+[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export WORKON_HOME=$HOME/.venv
 export PROJECT_HOME=$HOME/projects
-. /usr/bin/virtualenvwrapper.sh
+[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
