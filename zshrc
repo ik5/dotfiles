@@ -18,6 +18,10 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
   export OS="bsd"
 fi
 
+if [[ "$OS" == "macosx" && -f /usr/local/bin/ggrep ]]; then
+  alias grep="/usr/local/bin/ggrep"
+fi
+
 export EDITOR=nvim
 export VISUAL=nvim
 export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
