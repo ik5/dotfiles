@@ -18,7 +18,7 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
   export OS="bsd"
 fi
 
-if [[ "$OS" == "macosx" && -f /usr/local/bin/ggrep ]]; then
+if [[ "$OS" == "macosx" && -e /usr/local/bin/ggrep ]]; then
   alias grep="/usr/local/bin/ggrep"
 fi
 
@@ -121,11 +121,11 @@ alias fgrep='fgrep --color=auto'
 alias mnt='mount | column -t'
 alias gomod='GO111MODULE=on go'
 
-if [[ "$OS" == "macosx" && -f /usr/local/bin/gdate ]]; then
+if [[ "$OS" == "macosx" && -e /usr/local/bin/gdate ]]; then
   alias date="/usr/local/bin/gdate"
 fi
 
-if [ -f $HOME/.zshrc.private ]; then
+if [ -e $HOME/.zshrc.private ]; then
   # loading private stuff that should not be on github
   source $HOME/.zshrc.private
 fi
@@ -148,7 +148,7 @@ fi
 function virtual_env_prompt () {
     REPLY=${VIRTUAL_ENV+(${VIRTUAL_ENV:t}) }
 }
-grml_theme_add_token  virtual-env -f virtual_env_prompt '%F{magenta}' '%f'
+grml_theme_add_token  virtual-env -e virtual_env_prompt '%F{magenta}' '%f'
 zstyle ':prompt:grml:left:setup' items rc virtual-env change-root user at host path vcs percent
 
 ## ZLE tweaks ##
@@ -418,17 +418,18 @@ if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
   source /etc/profile.d/emscripten.sh
 fi
 
-# execute android's path scripts
-for f in `/etc/profile.d/android-*.sh`; do
-  source $f
-done
+if [[ -e "/etc/profile.d/android"* ]]; then
+  # execute android's path scripts
+  for f in `/etc/profile.d/android-*.sh`; do
+    source $f
+  done
 
-if [[ -e $ANDROID_HOME ]]; then
-  if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
-    PATH=$ANDROID_HOME/tools/bin:$PATH
+  if [[ -e $ANDROID_HOME ]]; then
+    if [[ ":$PATH:" != "*/opt/android-sdk/tools/bin/*" ]]; then
+      PATH=$ANDROID_HOME/tools/bin:$PATH
+    fi
   fi
 fi
-
 export PATH=${GOPATH}bin/:$PATH
 
 # expprt the default settings for GOOS and GOARCH, I use them inside (n)vim
@@ -453,11 +454,11 @@ alias vidrm="sudo modprobe -r uvcvideo"
 [[ $? -eq 0 ]] && screenfetch
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # added by travis gem
-[ -f $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
+[ -e $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
 
 export WORKON_HOME=$HOME/.venv
 export PROJECT_HOME=$HOME/projects
-[ -f /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+[ -e /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
