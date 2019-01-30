@@ -105,7 +105,7 @@ if [[ "$GOPATH" == "" ]]; then
   export GOPATH="$HOME/projects/go_resources/"
 fi
 
-export GOROOT=/usr/lib/go/
+export GOROOT=$(go env GOROOT)
 export GO111MODULE=auto
 
 if [[ "$OS" == "linux" ]]; then
