@@ -3,7 +3,7 @@
 # outputting anything in those cases.
 if [[ $- != *i* ]] ; then
 	# Shell is non-interactive.  Be done now!
-	return
+	# return
 fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -87,6 +87,9 @@ antigen bundle colorize
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle popstas/zsh-command-time
 antigen bundle zsh-users/zsh-completions
+if [[ "$OS" == "macosx" ]]; then
+  antigen bundle osx
+fi
 
 antigen theme ys
 antigen apply
@@ -437,8 +440,10 @@ alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
 
-`which screenfetch 2>&1 > /dev/null`
-[[ $? -eq 0 ]] && screenfetch
+if [[ "$OS" == "linux" ]]; then
+  `which screenfetch 2>&1 > /dev/null`
+  [[ $? -eq 0 ]] && screenfetch
+fi
 
 
 [ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -449,3 +454,8 @@ alias vidrm="sudo modprobe -r uvcvideo"
 export WORKON_HOME=$HOME/.venv
 export PROJECT_HOME=$HOME/projects
 [ -e /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+
+if [[ "$OS" == "macosx" ]]; then
+  test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+fi
+
