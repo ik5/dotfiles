@@ -426,6 +426,8 @@ export PATH=${GOPATH}bin/:$PATH
 export GOOS=$(go env GOOS)
 export GOARCH=$(go env GOARCH)
 
+alias goget=go get -v -u
+
 for i in $(seq 6 -1 3); do
   gempath="$HOME/.gem/ruby/2.$i.0/bin"
   if [[ -d "$gempath" ]]; then
@@ -437,8 +439,10 @@ done
 # alias vim="nvim"
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
-alias vidadd="sudo modprobe uvcvideo"
-alias vidrm="sudo modprobe -r uvcvideo"
+if [[ "$OS" == "linux" ]]; then
+  alias vidadd="sudo modprobe uvcvideo"
+  alias vidrm="sudo modprobe -r uvcvideo"
+fi
 
 if [[ "$OS" == "linux" ]]; then
   `which screenfetch 2>&1 > /dev/null`
