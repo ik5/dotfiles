@@ -18,6 +18,10 @@ elif [[ "$OSTYPE" == "freebsd"* ]]; then
   export OS="bsd"
 fi
 
+if [[ "$OS" == "macosx" && -e "$HOME/etc_zsh_zshrc" ]]; then
+  source $HOME/etc_zsh_zshrc
+fi
+
 if [[ "$OS" == "macosx" && -e /usr/local/bin/ggrep ]]; then
   alias grep="/usr/local/bin/ggrep"
 fi
