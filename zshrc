@@ -32,12 +32,9 @@ export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx 
 export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
 
 # set to TMUX terminal if we are inside tmux
-# set to TMUX terminal if we are inside tmux
-if [[ "$OS" == "linux" ]]; then
-  [[ $TMUX != "" ]] && export TERM="screen-256color"
-elif [[ "$OS" == "macosx" ]]; then
+[[ $TMUX != "" ]] && export TERM="screen-256color"
+if [[ "$OS" == "macosx" ]]; then
   export CLICOLOR=1
-  [[ $TMUX != "" ]] && export TERM="xterm-256color"
 fi
 
 # fix n a new ruby version installed
@@ -436,7 +433,7 @@ export PATH=${GOPATH}bin/:$PATH
 export GOOS=$(go env GOOS)
 export GOARCH=$(go env GOARCH)
 
-alias goget=go get -v -u
+alias goget='go get -v -u'
 
 for i in $(seq 6 -1 3); do
   gempath="$HOME/.gem/ruby/2.$i.0/bin"
