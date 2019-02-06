@@ -118,16 +118,17 @@ fi
 export GOROOT=$(go env GOROOT)
 export GO111MODULE=auto
 
+alias ll='ls -lh'
 if [[ "$OS" == "linux" ]]; then
   alias ls='ls --color=always'
 elif [[ "$OS" == "macosx" || "$OS" == "bsd" ]]; then
   if [[ -f  "/usr/local/bin/colorls" ]]; then
     alias ls='colorls --dark'
+    alias ll='ls -l'
   else
     alias ls='ls -G'
   fi
 fi
-alias ll='ls -lh'
 alias lla='ll -A'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
