@@ -121,7 +121,11 @@ export GO111MODULE=auto
 if [[ "$OS" == "linux" ]]; then
   alias ls='ls --color=always'
 elif [[ "$OS" == "macosx" || "$OS" == "bsd" ]]; then
-  alias ls='ls -G'
+  if [[ -f  "/usr/local/bin/colorls" ]]; then
+    alias ls='colorls --dark'
+  else
+    alias ls='ls -G'
+  fi
 fi
 alias ll='ls -lh'
 alias lla='ll -A'
