@@ -56,6 +56,8 @@
 	followRedirects = true
 [url "git@github.com:"]
 	insteadOf = https://github.com:443/
+[url "ssh://git@bitbucket.org/"]
+	insteadOf = https://bitbucket.org/
 [help]
   autocorrect = 1
 [web]
@@ -67,6 +69,9 @@
   prompt = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[mergetool "meld"]
+  trustExitCode = true
+  cmd = open -W -a Meld --args --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"
 [transfer]
 	fsckobjects = true
 [fetch]
