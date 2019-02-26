@@ -3,7 +3,7 @@
 	email = ido@adanite.com
 [core]
 	editor = nvim
-  excludesfile = /home/ik/.gitignore
+	excludesfile = /Users/ik/.gitignore_global
   # pager = less -x2 -R
   quotepath = false
   precomposeunicode = true
@@ -79,3 +79,11 @@
 [receive]
   fsckobjects = true
 
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[commit]
+	template = /Users/ik/.stCommitMsg
