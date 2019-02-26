@@ -2,8 +2,8 @@
 # past this point for scp and rcp, and it's important to refrain from
 # outputting anything in those cases.
 if [[ $- != *i* ]] ; then
-	# Shell is non-interactive.  Be done now!
-	# return
+  # Shell is non-interactive.  Be done now!
+  # return
 fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -147,11 +147,11 @@ fi
 
 export PULSE_LATENCY_MSEC=60
 # Settings for umask
-if (( EUID == 0 )); then
+  if (( EUID == 0 )); then
     umask 002
-else
+  else
     umask 022
-fi
+  fi
 
 ## ZLE tweaks ##
 
@@ -163,18 +163,18 @@ bindkey -M menuselect 'j' vi-down-line-or-history # bottom
 
 ## set command prediction from history, see 'man 1 zshcontrib'
 is4 && zrcautoload predict-on && \
-zle -N predict-on         && \
-zle -N predict-off        && \
-bindkey "^X^Z" predict-on && \
-bindkey "^Z^X" predict-off
+  zle -N predict-on         && \
+  zle -N predict-off        && \
+  bindkey "^X^Z" predict-on && \
+  bindkey "^Z^X" predict-off
 
 ## press ctrl-q to quote line:
 mquote () {
-      zle beginning-of-line
-      zle forward-word
-      # RBUFFER="'$RBUFFER'"
-      RBUFFER=${(q)RBUFFER}
-      zle end-of-line
+  zle beginning-of-line
+  zle forward-word
+  # RBUFFER="'$RBUFFER'"
+  RBUFFER=${(q)RBUFFER}
+  zle end-of-line
 }
 zle -N mquote && bindkey '^q' mquote
 
@@ -187,7 +187,7 @@ WORDCHARS='${WORDCHARS:s@/@}'
 # just type '...' to get '../..'
 rationalise-dot() {
 local MATCH
-if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
+if [[ $LBUFFER =~ '(^|/| |  |'$'\n''|\||;|&)\.\.$' ]]; then
   LBUFFER+=/
   zle self-insert
   zle self-insert
@@ -278,10 +278,10 @@ manzsh()  { /usr/bin/man zshall |  $PAGER +/"$1" ; }
 
 ## Switching shell safely and efficiently? http://www.zsh.org/mla/workers/2001/msg02410.html
 bash() {
-    NO_SWITCH="yes" command bash "$@"
+  NO_SWITCH="yes" command bash "$@"
 }
 restart () {
-    exec $SHELL $SHELL_ARGS "$@"
+  exec $SHELL $SHELL_ARGS "$@"
 }
 
 ## Handy functions for use with the (e::) globbing qualifier (like nt)
@@ -291,41 +291,41 @@ ot () { [[ $REPLY -ot ${~1} ]] }
 
 # List all occurrences of programm in current PATH
 plap() {
-    emulate -L zsh
-    if [[ $# = 0 ]] ; then
-        echo "Usage:    $0 program"
-        echo "Example:  $0 zsh"
-        echo "Lists all occurrences of program in the current PATH."
-    else
-        ls -l ${^path}/*$1*(*N)
-    fi
+  emulate -L zsh
+  if [[ $# = 0 ]] ; then
+    echo "Usage:    $0 program"
+    echo "Example:  $0 zsh"
+    echo "Lists all occurrences of program in the current PATH."
+  else
+    ls -l ${^path}/*$1*(*N)
+  fi
 }
 
 # Find out which libs define a symbol
 lcheck() {
-    if [[ -n "$1" ]] ; then
-        nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
-    else
-        echo "Usage: lcheck <function>" >&2
-    fi
+  if [[ -n "$1" ]] ; then
+    nm -go /usr/lib/lib*.a 2>/dev/null | grep ":[[:xdigit:]]\{8\} . .*$1"
+  else
+    echo "Usage: lcheck <function>" >&2
+  fi
 }
 
 # Memory overview
 memusage() {
-    ps aux | awk '{if (NR > 1) print $5;
-                   if (NR > 2) print "+"}
-                   END { print "p" }' | dc | numfmt --to=iec-i --suffix=B
+  ps aux | awk '{if (NR > 1) print $5;
+    if (NR > 2) print "+"}
+    END { print "p" }' | dc | numfmt --to=iec-i --suffix=B
 }
 
 # print hex value of a number
 hex() {
-    emulate -L zsh
-    if [[ -n "$1" ]]; then
-        printf "%x\n" $1
-    else
-        print 'Usage: hex <number-to-convert>'
-        return 1
-    fi
+  emulate -L zsh
+  if [[ -n "$1" ]]; then
+    printf "%x\n" $1
+  else
+    print 'Usage: hex <number-to-convert>'
+    return 1
+  fi
 }
 
 # from https://gist.github.com/knadh/123bca5cfdae8645db750bfb49cb44b0
@@ -362,7 +362,7 @@ function precmd() {
 # create a directory and enter to it
 # if parent directory does not exists, it creates it as well
 function mkthencd {
-  if [ ! -n "$1" ]; then
+if [ ! -n "$1" ]; then
     echo "Usage: $0 <dir name>"
   elif [ -d $1 ]; then
     (>&2 echo "\`$1' already exists")
@@ -387,7 +387,7 @@ function gcdrt () {
   # from https://github.com/nibalizer/bash-tricks/
   TEMP_PWD=`pwd`
   while ! [ -d .git ]; do
-  cd ..
+    cd ..
   done
   OLDPWD=$TEMP_PWD
 }
@@ -475,3 +475,6 @@ if [[ "$OS" == "macosx" ]]; then
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
+if [[ "$OS" == "macosx" && -f "/usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh" ]]; then
+  source /usr/local/opt/git-extras/share/git-extras/git-extras-completion.zsh
+fi
