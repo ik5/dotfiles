@@ -1,6 +1,6 @@
 [user]
   name = Ido Kanner
-  email = ido@adanite.com
+  email = ido@odo.io
 [core]
   editor = nvim
   excludesfile = /Users/ik/.gitignore_global
@@ -73,7 +73,6 @@
   enabled = 1
   autoupdate = 1
 [merge]
-  tool = meld
   log = true
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
