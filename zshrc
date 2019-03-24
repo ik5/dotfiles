@@ -448,6 +448,12 @@ for i in $(seq 6 -1 3); do
   fi
 done
 
+if [[ "$OS" == "macosx" ]]; then
+  if [[ -e "$HOME/Library/Python/3.7/bin" ]]; then
+    export PATH="$HOME/Library/Python/3.7/bin":$PATH
+  fi
+fi
+
 # alias vim="nvim"
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
