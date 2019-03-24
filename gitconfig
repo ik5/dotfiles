@@ -1,6 +1,6 @@
 [user]
-	name = Ido Kanner
-	email = ido@odo.io
+  name = Ido Kanner
+  email = ido@odo.io
 [core]
   editor = nvim
   excludesfile = /Users/ik/.gitignore_global
@@ -91,11 +91,11 @@
 [receive]
   fsckobjects = true
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
 [mergetool "sourcetree"]
-	cmd = /Users/ik/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Users/ik/Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
 [commit]
   template = /Users/ik/.stCommitMsg
 [status]
@@ -104,7 +104,7 @@
   showUntrackedFiles = all
 
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
