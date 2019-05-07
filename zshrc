@@ -37,13 +37,15 @@ if [[ "$OS" == "macosx" ]]; then
   export CLICOLOR=1
 fi
 
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # fix n a new ruby version installed
 if [[ -e ~/.bin/tmuxinator.zsh ]]; then
   source ~/.bin/tmuxinator.zsh
 else
   (>&2 echo "\e[1mWARNING:\e[0m \e[93m\e[101mCould not find \e[1m\e[4m$HOME/.bin/tmuxinator.zsh\e[21m\e[24m.\e[0m")
 fi
-
 
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=950000
@@ -160,6 +162,18 @@ bindkey -M menuselect 'h' vi-backward-char        # left
 bindkey -M menuselect 'k' vi-up-line-or-history   # up
 bindkey -M menuselect 'l' vi-forward-char         # right
 bindkey -M menuselect 'j' vi-down-line-or-history # bottom
+
+# from https://github.com/zSucrilhos/dotfiles/
+# add missing vim hotkeys
+# http://zshwiki.org/home/zle/vi-mode
+bindkey -a u undo
+bindkey -a '^T' redo
+bindkey '^?' backward-delete-char #backspace
+# history search in vim mode
+# http://zshwiki.org./home/zle/bindkeys#why_isn_t_control-r_working_anymore
+# ctrl+r to search history
+bindkey -M viins '^r' history-incremental-search-backward
+bindkey -M vicmd '^r' history-incremental-search-backward
 
 ## set command prediction from history, see 'man 1 zshcontrib'
 is4 && zrcautoload predict-on && \
