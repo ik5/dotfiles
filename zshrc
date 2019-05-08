@@ -447,7 +447,7 @@ if [[ "$OS" == "linux" ]]; then
 fi
 
 
-[ -e ~/.fzf.zsh ] && source ~/.fzf.zsh
+[[ -e ~/.fzf.zsh && `test -h ~/.fzf.zsh` ]] && source ~/.fzf.zsh
 
 # added by travis gem
 [ -e $HOME/.travis/travis.sh ] && source $HOME/.travis/travis.sh
