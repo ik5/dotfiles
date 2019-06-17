@@ -123,6 +123,7 @@
 --langmap=protobuf:.proto
 --regex-protobuf=/^message[ \t]*([a-zA-Z0-9_]+)/\1/m,message/
 --regex-protobuf=/^[ \t]*(optional|required|repeated)[ \t]*([a-zA-Z0-9_]+)[ \t]*([a-zA-Z0-9_]+)/\3/v,variable/
+
 --langdef=thrift
 --langmap=thrift:.thrift
 --regex-thrift=/^[ \t]*exception[ \t]+([a-zA-Z0-9_]+)/\1/x,exception/
