@@ -317,6 +317,11 @@ hex() {
     fi
 }
 
+# get geolocation from domain/ip
+function getipinfo() {
+  curl -s https://ipinfo.io/$(dig +short "$1") | jq ;
+}
+
 # from https://gist.github.com/knadh/123bca5cfdae8645db750bfb49cb44b0
 function preexec() {
   timer=$(($(date +%s%N)/1000000))
