@@ -1,11 +1,13 @@
 \timing
+\encoding UTF8
 -- Prompt on xterm title:
 -- %033]0;psql %M:%> %n@%~%R%#%x%007
 \set PROMPT1 '%M:%> %n@%~%R%#%x %033]0;psql %M:%> %n@%~%R%#%x%007'
 \set PROMPT2 '... %R> '
 \set ON_ERROR_STOP on
 \set ON_ERROR_ROLLBACK interactive
-\set COMP_KEYWORD_CASE upper
+-- Ensure autocompleted keywords stay lowercase
+\set COMP_KEYWORD_CASE lower
 \set HISTSIZE 50000
 \set HISTFILE ~/tmp/psql-history/.psql_history- :DBNAME
 \set HISTCONTROL ignoredups
@@ -21,3 +23,10 @@
 \pset null '¤'
 
 \x auto
+set intervalstyle to 'postgres_verbose';
+
+-- Prevent Ctrl-D from exiting psql.
+\set IGNOREEOF 5
+
+-- display application name in pg_stat_activity
+set application_name to manni_desktop; commit;
