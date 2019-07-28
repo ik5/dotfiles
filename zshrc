@@ -409,7 +409,6 @@ weh() { perl -le 'print pack "H*","'$1'"' }
 #vimpm ()      { vim `perldoc -l $1 | sed -e 's/pod$/pm/'` }
 # vimhelp ()    { nvim -c "help $1" -c on -c "au! VimEnter *" }
 
-
 if [[ -e '/etc/profile.d/emscripten.sh' ]]; then
   source /etc/profile.d/emscripten.sh
 fi
@@ -466,3 +465,4 @@ if [[ "$OS" == "macosx" ]]; then
 fi
 
 alias goget='go get -v -u'
+source /usr/share/nvm/init-nvm.sh
