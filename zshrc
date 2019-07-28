@@ -465,4 +465,4 @@ if [[ "$OS" == "macosx" ]]; then
 fi
 
 alias goget='go get -v -u'
-source /usr/share/nvm/init-nvm.sh
+[ -e/usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
