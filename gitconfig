@@ -1,19 +1,19 @@
 [user]
-	name = Ido Kanner
-	email = idok@linesip.com
+  name = Ido Kanner
+  email = idok@linesip.com
 [core]
-	editor = nvim
+  editor = nvim
   excludesfile = /home/ik/.gitignore
   # pager = less -x2 -R
   quotepath = false
   precomposeunicode = true
   logAllRefUpdates = true
-	pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = diff-so-fancy | less --tabs=4 -RFX
 [color]
-	branch = auto
-	diff = auto
-	interactive = auto
-	status = auto
+  branch = auto
+  diff = auto
+  interactive = auto
+  status = auto
   ui = auto
   diff = auto
   grep = auto
@@ -39,6 +39,7 @@
   up      = !git pull --rebase --prune $@ && git submodule update --init --recursive
   bclean  = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone   = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
+  currentrev = "!f() { rev=$(git rev-parse HEAD); echo ${rev:0:7}; }; f"
   pl      = pull --rebase
   plas    = pull --rebase --autostash
   st      = status -v -u --column --show-stash
@@ -52,19 +53,19 @@
   # Update all submodules
   subup   = submodule update --init
 [push]
-	default = matching
+  default = matching
 [http "https://gopkg.in"]
-	followRedirects = true
+  followRedirects = true
 [url "git@github.com:"]
-	insteadOf = https://github.com:443/
+  insteadOf = https://github.com:443/
 [url "ssh://git@bitbucket.org/"]
-	insteadOf = https://bitbucket.org/
+  insteadOf = https://bitbucket.org/
 [help]
   autocorrect = 1
 [web]
   browser = firefox
 [rerere]
-	enabled = 1
+  enabled = 1
   autoupdate = 1
 [difftool]
   prompt = true
@@ -74,9 +75,9 @@
   trustExitCode = true
   cmd = open -W -a Meld --args --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"
 [transfer]
-	fsckobjects = true
+  fsckobjects = true
 [fetch]
-	fsckobjects = true
+  fsckobjects = true
 [receive]
   fsckobjects = true
 
