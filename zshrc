@@ -2,8 +2,8 @@
 # past this point for scp and rcp, and it's important to refrain from
 # outputting anything in those cases.
 if [[ $- != *i* ]] ; then
-	# Shell is non-interactive.  Be done now!
-	# return
+  # Shell is non-interactive.  Be done now!
+  # return
 fi
 
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
@@ -24,7 +24,7 @@ fi
 
 export EDITOR=nvim
 export VISUAL=nvim
-export BROWSER=$(which firefox chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
+export BROWSER=$(which firefox vivaldi vivaldi-stable chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
 export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
 
 # set to TMUX terminal if we are inside tmux
@@ -176,7 +176,7 @@ WORDCHARS='${WORDCHARS:s@/@}'
 # just type '...' to get '../..'
 rationalise-dot() {
 local MATCH
-if [[ $LBUFFER =~ '(^|/| |	|'$'\n''|\||;|&)\.\.$' ]]; then
+if [[ $LBUFFER =~ '(^|/| |  |'$'\n''|\||;|&)\.\.$' ]]; then
   LBUFFER+=/
   zle self-insert
   zle self-insert
@@ -444,6 +444,7 @@ alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
+alias mount_vm="sudo mount /run/media/ik/home_fs/ik/VirtualBox\ VMs ~/VirtualBox\ VMs --bind"
 
 if [[ "$OS" == "linux" ]]; then
   `which screenfetch 2>&1 > /dev/null`
