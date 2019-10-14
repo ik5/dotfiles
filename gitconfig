@@ -9,6 +9,7 @@
   precomposeunicode = true
   logAllRefUpdates = true
   pager = diff-so-fancy | less --tabs=4 -RFX
+	autocrlf = input
 [color]
   branch = auto
   diff = auto
