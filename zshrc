@@ -74,6 +74,7 @@ fi
 antigen use oh-my-zsh
 
 #antigen bundle git
+antigen bundle git-prompt
 antigen bundle git-flow-avh
 antigen bundle pip
 antigen bundle heroku
