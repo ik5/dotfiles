@@ -27,16 +27,12 @@ export VISUAL=nvim
 export BROWSER=$(which firefox vivaldi vivaldi-stable chromium-browser google-chrome links2 links lynx | grep -Pm1 '^/')
 export TERMINAL=$(which tilix terminator konsole terminal aterm xterm | grep -Pm1 '^/')
 
-# set to TMUX terminal if we are inside tmux
-[[ $TMUX != "" ]] && export TERM="screen-256color"
-
 # fix n a new ruby version installed
 if [[ -e ~/.bin/tmuxinator.zsh ]]; then
   source ~/.bin/tmuxinator.zsh
 else
   (>&2 echo "\e[1mWARNING:\e[0m \e[93m\e[101mCould not find \e[1m\e[4m$HOME/.bin/tmuxinator.zsh\e[21m\e[24m.\e[0m")
 fi
-
 
 export HISTFILE=$HOME/.zsh_history
 export HISTSIZE=950000
@@ -92,9 +88,9 @@ if [[ "$OS" == "macosx" ]]; then
   antigen bundle osx
 fi
 
-antigen theme ys
 antigen apply
 
+antigen theme ys
 ZSH_COMMAND_TIME_ECHO=1
 ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
 
@@ -465,4 +461,9 @@ alias goget='go get -v -u'
 #   `which screenfetch 2>&1 > /dev/null`
 #   [[ $? -eq 0 ]] && screenfetch
 # fi
+
+[[ -e $HOME/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/tmux/tmux.plugin.zsh ]] && source $HOME/.antigen/bundles/robbyrussell/oh-my-zsh/plugins/tmux/tmux.plugin.zsh
+
+# set to TMUX terminal if we are inside tmux
+[[ $TMUX != "" ]] && export TERM="screen-256color"
 
