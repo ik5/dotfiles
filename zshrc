@@ -74,7 +74,6 @@ fi
 antigen use oh-my-zsh
 
 #antigen bundle git
-antigen bundle git-prompt
 antigen bundle git-flow-avh
 antigen bundle pip
 antigen bundle heroku
@@ -466,5 +465,4 @@ alias goget='go get -v -u'
 #   `which screenfetch 2>&1 > /dev/null`
 #   [[ $? -eq 0 ]] && screenfetch
 # fi
-
 
