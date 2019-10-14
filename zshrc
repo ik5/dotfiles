@@ -110,7 +110,6 @@ if [[ "$GOPATH" == "" ]]; then
 fi
 
 export GOROOT=$(go env GOROOT)
-export GO111MODULE=auto
 
 if [[ "$OS" == "linux" ]]; then
   alias ls='ls --color=always'
@@ -446,12 +445,6 @@ alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
 alias mount_vm="sudo mount /run/media/ik/home_fs/ik/VirtualBox\ VMs ~/VirtualBox\ VMs --bind"
 
-if [[ "$OS" == "linux" ]]; then
-  `which screenfetch 2>&1 > /dev/null`
-  [[ $? -eq 0 ]] && screenfetch
-fi
-
-
 [[ -e ~/.fzf.zsh && `test -h ~/.fzf.zsh` ]] && source ~/.fzf.zsh
 
 # added by travis gem
@@ -459,11 +452,18 @@ fi
 
 export WORKON_HOME=$HOME/.venv
 export PROJECT_HOME=$HOME/projects
-[ -e /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
+# [ -e /usr/bin/virtualenvwrapper.sh ] && source /usr/bin/virtualenvwrapper.sh
 
 if [[ "$OS" == "macosx" ]]; then
   test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 fi
 
 alias goget='go get -v -u'
-[ -e/usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+# [ -e/usr/share/nvm/init-nvm.sh ] && source /usr/share/nvm/init-nvm.sh
+
+# if [[ "$OS" == "linux" ]]; then
+#   `which screenfetch 2>&1 > /dev/null`
+#   [[ $? -eq 0 ]] && screenfetch
+# fi
+
+
