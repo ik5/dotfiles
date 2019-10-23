@@ -467,3 +467,8 @@ alias goget='go get -v -u'
 # set to TMUX terminal if we are inside tmux
 [[ $TMUX != "" ]] && export TERM="screen-256color"
 
+###-tns-completion-start-###
+if [ -f $HOME/.tnsrc ]; then
+    source $HOME/.tnsrc
+fi
+###-tns-completion-end-###
