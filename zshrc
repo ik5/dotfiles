@@ -119,6 +119,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias mnt='mount | column -t'
 alias gomod='GO111MODULE=on go'
+alias mux='tmuxinator'
 
 if [[ "$OS" == "macosx" && -e /usr/local/bin/gdate ]]; then
   alias date="/usr/local/bin/gdate"
@@ -426,7 +427,7 @@ export PATH=${GOPATH}bin/:$PATH
 export GOOS=$(go env GOOS)
 export GOARCH=$(go env GOARCH)
 
-for i in $(seq 6 -1 3); do
+for i in $(seq 9 -1 3); do
   gempath="$HOME/.gem/ruby/2.$i.0/bin"
   if [[ -d "$gempath" ]]; then
     PATH=$gempath:$PATH
