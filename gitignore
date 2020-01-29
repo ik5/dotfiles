@@ -20,3 +20,4 @@ vendor/*
 package-lock.json
 *sqlite3
 .netrwhist
+*pyc
