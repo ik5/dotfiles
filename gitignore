@@ -21,3 +21,6 @@ package-lock.json
 *sqlite3
 .netrwhist
 *pyc
+__pycache__/**
+*.py[cod]
+*$py.class
