@@ -24,3 +24,5 @@ package-lock.json
 __pycache__/**
 *.py[cod]
 *$py.class
+.vscode/**
+.ccls-cache/**
