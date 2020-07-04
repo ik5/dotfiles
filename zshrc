@@ -105,6 +105,11 @@ if [[ "$GOPATH" == "" ]]; then
   export GOPATH="$HOME/projects/go_resources/"
 fi
 
+if [[ "$GOBIN" == "" ]]; then
+  mkdir -p $HOME/projects/go_resources/bin
+  export GOBIN="$HOME/projects/go_resources/bin"
+fi
+
 export GOROOT=$(go env GOROOT)
 
 if [[ "$OS" == "linux" ]]; then
@@ -421,7 +426,7 @@ if [[ -e "/etc/profile.d/android"* ]]; then
     fi
   fi
 fi
-export PATH=${GOPATH}bin/:$PATH
+export PATH=$PATH:${GOBIN}
 
 # expprt the default settings for GOOS and GOARCH, I use them inside (n)vim
 export GOOS=$(go env GOOS)
