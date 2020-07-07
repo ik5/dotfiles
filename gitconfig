@@ -63,8 +63,6 @@
   insteadOf = https://github.com:443/
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
-[url "https://git.paycall.co.il:7990"]
-  insteadOf = https://git.paycall.co.il/
 [help]
   autocorrect = 1
 [web]
