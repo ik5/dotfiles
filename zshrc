@@ -77,7 +77,7 @@ antigen bundle gem
 antigen bundle npm
 antigen bundle command-not-found
 antigen bundle ruby
-antigen bundle go
+antigen bundle golang
 antigen bundle tmux
 antigen bundle colored-man-pages
 antigen bundle colorize
