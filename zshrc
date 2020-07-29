@@ -68,36 +68,40 @@ if [[ ! -x antigen-apply ]]; then
   source $HOME/antigen.zsh
 fi
 
-antigen use oh-my-zsh
+source git.zsh
 
-#antigen bundle git
-antigen bundle git-flow-avh
-antigen bundle pip
-antigen bundle heroku
-antigen bundle gem
-antigen bundle npm
-antigen bundle command-not-found
-antigen bundle ruby
-antigen bundle golang
-antigen bundle tmux
-antigen bundle colored-man-pages
-antigen bundle colorize
-antigen bundle zsh-users/zsh-syntax-highlighting
-antigen bundle popstas/zsh-command-time
-antigen bundle zsh-users/zsh-completions
-if [[ "$OS" == "macosx" ]]; then
-  antigen bundle osx
-fi
+#antigen use oh-my-zsh
 
-antigen apply
+##antigen bundle git
+#antigen bundle git-flow-avh
+#antigen bundle pip
+#antigen bundle heroku
+#antigen bundle gem
+#antigen bundle npm
+#antigen bundle command-not-found
+#antigen bundle ruby
+#antigen bundle golang
+#antigen bundle tmux
+#antigen bundle colored-man-pages
+#antigen bundle colorize
+#antigen bundle zsh-users/zsh-syntax-highlighting
+#antigen bundle popstas/zsh-command-time
+#antigen bundle zsh-users/zsh-completions
+#if [[ "$OS" == "macosx" ]]; then
+#  antigen bundle osx
+#fi
+#
+#antigen theme ys
+#antigen apply
 
-antigen theme ys
 ZSH_COMMAND_TIME_ECHO=1
 ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
 
 # The following lines were added by compinstall
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
+# load bashcompinit for some old bash completions
+autoload bashcompinit && bashcompinit
 compinit
 # End of lines added by compinstall
 
