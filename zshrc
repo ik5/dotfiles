@@ -6,6 +6,8 @@ if [[ $- != *i* ]] ; then
   # return
 fi
 
+prompt off
+
 if [[ "$OSTYPE" == "linux-gnu" ]]; then
   export OS="linux"
 elif [[ "$OSTYPE" == "darwin"* ]]; then
@@ -61,38 +63,36 @@ setopt CORRECT
 # do not timeout a session
 unset TMOUT
 
-#
+
 ### Antigen configuration
-. $HOME/antigen.zsh
 if [[ ! -x antigen-apply ]]; then
   source $HOME/antigen.zsh
+
+  antigen use oh-my-zsh
+
+  #antigen bundle git
+  antigen bundle git-flow-avh
+  antigen bundle pip
+  antigen bundle heroku
+  antigen bundle gem
+  antigen bundle npm
+  antigen bundle command-not-found
+  antigen bundle ruby
+  antigen bundle golang
+  antigen bundle tmux
+  antigen bundle colored-man-pages
+  antigen bundle colorize
+  antigen bundle zsh-users/zsh-syntax-highlighting
+  antigen bundle popstas/zsh-command-time
+  antigen bundle zsh-users/zsh-completions
+  if [[ "$OS" == "macosx" ]]; then
+    antigen bundle osx
+  fi
+
+  antigen theme ys
+  antigen apply
 fi
 
-source git.zsh
-
-#antigen use oh-my-zsh
-
-##antigen bundle git
-#antigen bundle git-flow-avh
-#antigen bundle pip
-#antigen bundle heroku
-#antigen bundle gem
-#antigen bundle npm
-#antigen bundle command-not-found
-#antigen bundle ruby
-#antigen bundle golang
-#antigen bundle tmux
-#antigen bundle colored-man-pages
-#antigen bundle colorize
-#antigen bundle zsh-users/zsh-syntax-highlighting
-#antigen bundle popstas/zsh-command-time
-#antigen bundle zsh-users/zsh-completions
-#if [[ "$OS" == "macosx" ]]; then
-#  antigen bundle osx
-#fi
-#
-#antigen theme ys
-#antigen apply
 
 ZSH_COMMAND_TIME_ECHO=1
 ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
@@ -100,8 +100,6 @@ ZSH_COMMAND_TIME_MIN_SECONDS=1 # one seconds and more
 # The following lines were added by compinstall
 zstyle :compinstall filename "$HOME/.zshrc"
 autoload -Uz compinit
-# load bashcompinit for some old bash completions
-autoload bashcompinit && bashcompinit
 compinit
 # End of lines added by compinstall
 
