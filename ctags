@@ -77,6 +77,8 @@
 --kinddef-vue=e,event,events
 --kinddef-vue=v,variable,variables
 --kinddef-vue=s,style,styles
+--kinddef-vue=i,import,imports
+--kinddef-vue=E,export,exports
 
 --mline-regex-Vue=/<template>\n((.|\n){1,}\n)<\/template>/T,template/{_guest=HTML,1start,1end}
 # --mline-regex-Vue=/<script>\n((.|\n){1,}\n)<\/script>//{_guest=JavaScript,1start,1end}
@@ -85,6 +87,44 @@
 --_roledef-vue.p=watched,watched property
 --_roledef-vue.p=prop,property as prop
 --_roledef-vue.e=emitted,emitted event
+
+--regex-vue=/^[ \t]*export[ \t]+(default)/\1/E,export/{scope=push}
+# --regex-vue=/^export const ([[:alnum:]_]+)[^={]/\1/E,export/{scope=push}
+--regex-vue=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\5/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\7/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,EXports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}function[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\5/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}\({[ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\7/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}function[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)/\1/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\2/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}var[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}let[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+--regex-vue=/^[ \t]*export[ \t]\{1,\}default[ \t]\{1,\}const[ \t]\{1,\}\([A-Za-z0-9_$]\{1,\}\)[ \t]*[^,]\{1,\},[ \t]*\([A-Za-z0-9_$]\{1,\}\)[ \t]*,[ \t]*\([A-Za-z0-9_$]\{1,\}\)/\3/E,export,exports/b
+
+--regex-vue=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/i,import,imports/b
+--regex-vue=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\5/i,import,imports/b
+--regex-vue=/^[ \t]*import[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)*\([A-Za-z0-9_]\{1,\}\),[ \t]*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\7/i,import,imports/b
+--regex-vue=/^[ \t]*import[ \t]\{1,\}type[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/i,import,imports/b
+--regex-vue=/^[ \t]*import[ \t]\{1,\}typeof[ \t]\{1,\}\([{][ \t]*\)*\([A-Za-z0-9_\*]*[ \t]as[ \t]\)\([A-Za-z0-9_]\{1,\}\)/\3/i,import,imports/b
+--regex-vue=/^[ \t]*[A-Za-z0-9_]\{1,\}[ \t]as[ \t]\([A-Za-z0-9_]\{1,\}\)/\1/i,import,imports/b
+--regex-vue=/^[ \t]*import[ \t]+\{[ \t]*([ \n\t]*([a-zA-Z0-9_])+([ \t\n]*)(,?[ \t\n]*))*[ \t]*\}/\1/i,import,imports/
 
 --_tabledef-vue=toplevel
 --_tabledef-vue=htmlComment
@@ -131,6 +171,8 @@
 --_mtable-regex-vue=script/\/\*//{tenter=blockComment}
 --_mtable-regex-vue=script/'//{tenter=singleQuoteString}
 --_mtable-regex-vue=script/"//{tenter=doubleQuoteString}
+# TODO: find better way to solve this...
+#--_mtable-regex-vue=script/[^e][^x][^p][^o][^r][^t][^ ]const *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
 --_mtable-regex-vue=script/const *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
 --_mtable-regex-vue=script/var *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
 --_mtable-regex-vue=script/let *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
