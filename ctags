@@ -63,39 +63,195 @@
 --regex-make=/^([^# \t]*):/\1/t,target/
 
 # A ctags syntax file for vue components
+# currently based on https://github.com/andbar-ru/ctags.d
 --langdef=vue
 --langmap=vue:.vue
+--map-vue=+.vue
 
-# vue-commands in <template>
---regex-vue=/^(<template>)$/\1/t,template/{scope=set}{exclusive}
---regex-vue=/^\S*(.*(v-if=|v-for=|v-show=|ref=)("[^"]*"))/\2\3/c,command/{scope=ref}
---regex-vue=/^(<\/template>)$/\1//{scope=pop}{exclusive}{placeholder}
+--kinddef-vue=t,tag,tags
+--kinddef-vue=T,template,templates
+--kinddef-vue=o,object,objects
+--kinddef-vue=p,property,properties
+--kinddef-vue=n,name,names
+--kinddef-vue=f,function,functions
+--kinddef-vue=e,event,events
+--kinddef-vue=v,variable,variables
+--kinddef-vue=s,style,styles
 
-# css in <template>
---regex-vue=/^(<style.*)$/style/s,script/{scope=set}{exclusive}
---regex-vue=/^(<\/style>)$/\1//{scope=clear}{placeholder}
---regex-vue=/^function +([a-zA-Z_][a-zA-Z0-9_]*)/\1/f,function/{scope=ref}
+--mline-regex-Vue=/<template>\n((.|\n){1,}\n)<\/template>/T,template/{_guest=HTML,1start,1end}
+# --mline-regex-Vue=/<script>\n((.|\n){1,}\n)<\/script>//{_guest=JavaScript,1start,1end}
+--mline-regex-Vue=/<style([ ]{1,}[a-z]{1,})*>\n((.|\n){1,}\n)<\/style>/s,style/{_guest=CSS,2start,2end}
 
-# name, data, props, computed, methods, components, watch and their subfunctions
---regex-vue=/^ {2}((name|'name')[^,]*)/\1/p,property/{scope=ref}
---regex-vue=/^ {2}((data) \(|('data'):|(data):)/data/p,property/{scope=set}
---regex-vue=/^ {2}((props) \(|('props'):|(props):)/props/p,property/{scope=set}
---regex-vue=/^ {2}((computed) \(|('computed'):|(computed):)/computed/p,property/{scope=set}
---regex-vue=/^ {2}((methods) \(|('methods'):|(methods):)/methods/p,property/{scope=set}
---regex-vue=/^ {2}((components) \(|('components'):|(components):)/components/p,property/{scope=set}
---regex-vue=/^ {2}((watch) \(|('watch'):|(watch):)/watch/p,property/{scope=set}
---regex-vue=/^ {4}((async )?([a-zA-Z0-9_]*) \(|('[a-zA-Z0-9_\.]*'):|('[a-zA-Z0-9_\.]*') \(|([a-zA-Z0-9_]*):)/\2\3\4\5\6/p,property/{scope=ref}
---regex-vue=/^(([a-zA-Z0-9_#\$\.\{\}-]*) \{)/\2/p,property/{scope=ref}
+--_roledef-vue.p=watched,watched property
+--_roledef-vue.p=prop,property as prop
+--_roledef-vue.e=emitted,emitted event
 
-# all life cycle hooks
---regex-vue=/^ {2}((beforeCreate) \(|('beforeCreate'):|(beforeCreate):)/beforeCreate/p,property/{scope=set}
---regex-vue=/^ {2}((created) \(|('created'):|(created):)/created/p,property/{scope=set}
---regex-vue=/^ {2}((beforeMount) \(|('beforeMount'):|(beforeMount):)/beforeMount/p,property/{scope=set}
---regex-vue=/^ {2}((mounted) \(|('mounted'):|(mounted):)/mounted/p,property/{scope=set}
---regex-vue=/^ {2}((beforeUpdate) \(|('beforeUpdate'):|(beforeUpdate):)/beforeUpdate/p,property/{scope=set}
---regex-vue=/^ {2}((updated) \(|('updated'):|(updated):)/updated/p,property/{scope=set}
---regex-vue=/^ {2}((activated) \(|('activated'):|(activated):)/activated/p,property/{scope=set}
---regex-vue=/^ {2}((deactivated) \(|('deactivated'):|(deactivated):)/deactivated/p,property/{scope=set}
---regex-vue=/^ {2}((beforeDestroy) \(|('beforeDestroy'):|(beforeDestroy):)/beforeDestroy/p,property/{scope=set}
---regex-vue=/^ {2}((destroyed) \(|('destroyed'):|(destroyed):)/destroyed/p,property/{scope=set}
---regex-vue=/^ {2}((errorCaptured) \(|('errorCaptured'):|(errorCaptured):)/errorCaptured/p,property/{scope=set}
+--_tabledef-vue=toplevel
+--_tabledef-vue=htmlComment
+--_tabledef-vue=lineComment
+--_tabledef-vue=blockComment
+--_tabledef-vue=block
+--_tabledef-vue=singleQuoteString
+--_tabledef-vue=doubleQuoteString
+--_tabledef-vue=toplevelTag
+--_tabledef-vue=tag
+--_tabledef-vue=template
+--_tabledef-vue=style
+--_tabledef-vue=script
+--_tabledef-vue=component
+--_tabledef-vue=components
+--_tabledef-vue=dataBlock
+--_tabledef-vue=propsObject
+--_tabledef-vue=propsArray
+--_tabledef-vue=data
+--_tabledef-vue=computed
+--_tabledef-vue=methods
+--_tabledef-vue=watch
+
+--_mtable-regex-vue=toplevel/<!--//{tenter=htmlComment}
+--_mtable-regex-vue=toplevel/<template[^>]*>/template/t/{tenter=template}
+--_mtable-regex-vue=toplevel/<style ?[^>]*>/style/t/{tenter=style}{_guest=css,0end,}{scope=set}
+--_mtable-regex-vue=toplevel/<script[^>]*>//{tenter=script}
+--_mtable-regex-vue=toplevel/<([[:alpha:]_][[:alnum:]_-]*)[^>]*>/\1/t/{tenter=toplevelTag}
+--_mtable-regex-vue=toplevel/.//
+
+--_mtable-regex-vue=template/<\/template>//{tleave}
+--_mtable-regex-vue=template/<!--//{tenter=htmlComment}
+--_mtable-regex-vue=template/<template[^>]*>//{tenter=template}
+--_mtable-regex-vue=template/.//
+
+--_mtable-regex-vue=style/<\/style>//{tleave}{_guest=,,0start}
+--_mtable-regex-vue=style/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=style/'//{tenter=singleQuoteString}
+--_mtable-regex-vue=style/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=style/.//
+
+--_mtable-regex-vue=script/<\/script>//{tleave}
+--_mtable-regex-vue=script/\/\///{tenter=lineComment}
+--_mtable-regex-vue=script/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=script/'//{tenter=singleQuoteString}
+--_mtable-regex-vue=script/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=script/const *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
+--_mtable-regex-vue=script/var *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
+--_mtable-regex-vue=script/let *([[:alpha:]_][[:alnum:]$_-]*)/\1/v/
+--_mtable-regex-vue=script/\{//{tenter=block}
+--_mtable-regex-vue=script/export default *(Vue\.extend\()?\{\n///{tenter=component}
+--_mtable-regex-vue=script/.//
+
+--_mtable-regex-vue=toplevelTag/<\/[^>]+>//{tleave}
+--_mtable-regex-vue=toplevelTag/<!--//{tenter=htmlComment}
+--_mtable-regex-vue=toplevelTag/<//{tenter=tag}
+--_mtable-regex-vue=toplevelTag/.//
+
+--_mtable-regex-vue=tag/>//{tleave}
+--_mtable-regex-vue=tag/<!--//{tenter=htmlComment}
+--_mtable-regex-vue=tag/.//
+
+--_mtable-regex-vue=htmlComment/-->//{tleave}
+--_mtable-regex-vue=htmlComment/.//
+
+--_mtable-regex-vue=lineComment/\n//{tleave}
+--_mtable-regex-vue=lineComment/.//
+
+--_mtable-regex-vue=blockComment/\*\///{tleave}
+--_mtable-regex-vue=blockComment/.//
+
+--_mtable-regex-vue=singleQuoteString/\\\\'//{tleave}
+--_mtable-regex-vue=singleQuoteString/\\'//
+--_mtable-regex-vue=singleQuoteString/'//{tleave}
+--_mtable-regex-vue=singleQuoteString/.//
+
+--_mtable-regex-vue=doubleQuoteString/\\\\"//{tleave}
+--_mtable-regex-vue=doubleQuoteString/\\"//
+--_mtable-regex-vue=doubleQuoteString/"//{tleave}
+--_mtable-regex-vue=doubleQuoteString/.//
+
+--_mtable-regex-vue=component/\}//{tleave}
+--_mtable-regex-vue=component/\/\///{tenter=lineComment}
+--_mtable-regex-vue=component/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=component/['"]?name['"]?: *['"]([[:alpha:]_][[:alnum:]$_-]*)['"]/\1/n/
+--_mtable-regex-vue=component/['"]?components['"]?: *\{/components/o/{tenter=components}{scope=set}
+--_mtable-regex-vue=component/['"]?props['"]?: *\{/props/o/{tenter=propsObject}{scope=set}
+--_mtable-regex-vue=component/['"]?props['"]?: *\[/props/o/{tenter=propsArray}{scope=set}
+--_mtable-regex-vue=component/['"]?data['"]?:?[^(\n]*\( *\):? *\{/data/o/{tenter=data}{scope=set}
+--_mtable-regex-vue=component/['"]?computed['"]?: *\{/computed/o/{tenter=computed}{scope=set}
+--_mtable-regex-vue=component/['"]?methods['"]?: *\{/methods/o/{tenter=methods}{scope=set}
+--_mtable-regex-vue=component/['"]?watch['"]?: *\{/watch/o/{tenter=watch}{scope=set}
+--_mtable-regex-vue=component/['"]?([[:alnum:]$_-]+)['"]: (async )?function *\([^)]*\)/\1/f/
+--_mtable-regex-vue=component/['"]?([[:alnum:]$_-]+)['"]?:? *(async )?\([^)]*\)/\1/f/
+--_mtable-regex-vue=component/['"]?([[:alnum:]$_-]+)['"]?:/\1/p/
+--_mtable-regex-vue=component/\{//{tenter=block}
+--_mtable-regex-vue=component/'//{tenter=singleQuoteString}
+--_mtable-regex-vue=component/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=component/.//
+
+--_mtable-regex-vue=block/\}//{tleave}
+--_mtable-regex-vue=block/\/\///{tenter=lineComment}
+--_mtable-regex-vue=block/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=block/\$on\(['"]([^'":]+:[^'"]+)['"]/\1/e/
+--_mtable-regex-vue=block/\$emit\(['"]([^'":]+:[^'"]+)['"]/\1/e/{_role=emitted}
+--_mtable-regex-vue=block/'//{tenter=singleQuoteString}
+--_mtable-regex-vue=block/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=block/\{//{tenter=block}
+--_mtable-regex-vue=block/.//
+
+--_mtable-regex-vue=components/\}//{tleave}
+--_mtable-regex-vue=components/\/\///{tenter=lineComment}
+--_mtable-regex-vue=components/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=components/\{//{tenter=block}
+--_mtable-regex-vue=components/['"]?([[:alnum:]$_-]+)['"]?:/\1/o/{scope=ref}
+--_mtable-regex-vue=components/'//{tenter=singleQuoteString}
+--_mtable-regex-vue=components/"//{tenter=doubleQuoteString}
+--_mtable-regex-vue=components/.//
+
+--_mtable-regex-vue=watch/\}//{tleave}
+--_mtable-regex-vue=watch/\/\///{tenter=lineComment}
+--_mtable-regex-vue=watch/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=watch/\{//{tenter=block}
+--_mtable-regex-vue=watch/['"]?([[:alnum:]$_-]+\.)?([[:alnum:]$_-]+)['"]?:?([^(\n]*\([^)]*\))?/\2/p/{scope=ref}{_role=watched}
+--_mtable-regex-vue=watch/.//
+
+--_mtable-regex-vue=propsObject/\}//{tleave}
+--_mtable-regex-vue=propsObject/\/\///{tenter=lineComment}
+--_mtable-regex-vue=propsObject/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=propsObject/['"]?([[:alnum:]$_-]+)['"]? *:/\1/p/{scope=ref}{_role=prop}
+--_mtable-regex-vue=propsObject/\{//{tenter=block}
+--_mtable-regex-vue=propsObject/.//
+
+--_mtable-regex-vue=propsArray/\]//{tleave}
+--_mtable-regex-vue=propsArray/\/\///{tenter=lineComment}
+--_mtable-regex-vue=propsArray/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=propsArray/['"]([[:alnum:]$_-]+)['"]/\1/p/{scope=ref}{_role=prop}
+--_mtable-regex-vue=propsArray/.//
+
+--_mtable-regex-vue=data/\}//{tleave}
+--_mtable-regex-vue=data/\/\///{tenter=lineComment}
+--_mtable-regex-vue=data/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=data/return *\{//{tenter=dataBlock}
+--_mtable-regex-vue=data/['"]?([[:alnum:]$_-]+)['"]?:/\1/p/{scope=ref}
+--_mtable-regex-vue=data/.//
+
+--_mtable-regex-vue=dataBlock/\}//{tleave}
+--_mtable-regex-vue=dataBlock/\/\///{tenter=lineComment}
+--_mtable-regex-vue=dataBlock/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=dataBlock/\{//{tenter=block}
+--_mtable-regex-vue=dataBlock/['"]?([[:alnum:]$_-]+)['"]?:/\1/p/{scope=ref}
+--_mtable-regex-vue=dataBlock/.//
+
+--_mtable-regex-vue=computed/\}///{tleave}
+--_mtable-regex-vue=computed/\/\///{tenter=lineComment}
+--_mtable-regex-vue=computed/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=computed/\{//{tenter=block}
+--_mtable-regex-vue=computed/['"]?([[:alnum:]$_-]+)['"]?:/\1/p/{scope=ref}
+--_mtable-regex-vue=computed/['"]?([[:alnum:]$_-]+)['"]?:?[^(\n]*\( *\)/\1/p/{scope=ref}
+--_mtable-regex-vue=computed/.//
+
+--_mtable-regex-vue=methods/\}///{tleave}
+--_mtable-regex-vue=methods/\/\///{tenter=lineComment}
+--_mtable-regex-vue=methods/\/\*//{tenter=blockComment}
+--_mtable-regex-vue=methods/\{//{tenter=block}
+--_mtable-regex-vue=methods/['"]?([[:alnum:]$_-]+)['"]?:/\1/f/{scope=ref}
+--_mtable-regex-vue=methods/(async *)?['"]?([[:alnum:]$_-]+)['"]?:?[^(\n]*\([^)]*\)/\2/f/{scope=ref}
+--_mtable-regex-vue=methods/.//
+
+
