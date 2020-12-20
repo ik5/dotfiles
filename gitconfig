@@ -39,6 +39,8 @@
   opps    = reset --hard
   ls      = ls-files
   lsi     = ls-files -o -i --exclude-standard # show ignored ignored
+  ll      = log --oneline
+  last    = log -1 HEAD --stat
   up      = !git pull --rebase --prune $@ && git submodule update --init --recursive
   bclean  = "!f() { git branch --merged ${1-master} | grep -v " ${1-master}$" | xargs git branch -d; }; f"
   bdone   = "!f() { git checkout ${1-master} && git up && git bclean ${1-master}; }; f"
@@ -55,6 +57,11 @@
   churn   = !git log --all -M -C --name-only --format='format:' "$@" | sort | grep -v '^$' | uniq -c | sort | awk 'BEGIN {print "count,file"} {print $1 "," $2}'
   # Update all submodules
   subup   = submodule update --init
+  cm      = commit -m
+  search  = !git rev-list --all | xargs git grep -i -n -F
+  regexp  = !git rev-list --all | xargs git grep -i -n -P
+  count   = git rev-list --count
+  cleanup = git gc --prune=now --aggressive
 [push]
   default = matching
 [http "https://gopkg.in"]
@@ -64,7 +71,7 @@
 [url "ssh://git@bitbucket.org/"]
   insteadOf = https://bitbucket.org/
 [help]
-  autocorrect = 1
+  autocorrect = 10
 [web]
   browser = firefox
 [rerere]
