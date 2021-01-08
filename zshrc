@@ -449,6 +449,9 @@ alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
 alias vidrm="sudo modprobe -r uvcvideo"
 alias mount_vm="sudo mount /run/media/ik/home_fs/ik/VirtualBox\ VMs ~/VirtualBox\ VMs --bind"
+# pretty, show also column and use smart case (if start small -> case insensitive)
+# if start capital then case sensitive
+alias rgp="rg -p --column --smart-case"
 
 [[ -e ~/.fzf.zsh && `test -h ~/.fzf.zsh` ]] && source ~/.fzf.zsh
 
