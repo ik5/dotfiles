@@ -435,13 +435,8 @@ export PATH=$PATH:${GOBIN}
 export GOOS=$(go env GOOS)
 export GOARCH=$(go env GOARCH)
 
-for i in $(seq 9 -1 3); do
-  gempath="$HOME/.gem/ruby/2.$i.0/bin"
-  if [[ -d "$gempath" ]]; then
-    PATH=$gempath:$PATH
-    break
-  fi
-done
+ruby_version=$(ruby --version | cut -d' ' -f 2 | cut -d'.' -f 1,2)
+export PATH="$HOME/.gem/ruby/$ruby_version.0/bin":$PATH
 
 # alias vim="nvim"
 alias nvimdiff="nvim -d"
