@@ -54,6 +54,10 @@ setopt HIST_VERIFY               # Don't execute immediately upon history expans
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt INC_APPEND_HISTORY        # adds commands as they are typed, not at shell exit
 setopt APPEND_HISTORY            # append to history file
+setopt HIST_FCNTL_LOCK           # Lock history by system
+setopt HIST_LEX_WORDS            # handle spaces properly
+setopt HIST_NO_STORE             # do not save history command itself
+
 
 # if you do a 'rm *', Zsh will give you a sanity check!
 setopt RM_STAR_WAIT
