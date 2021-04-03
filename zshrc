@@ -53,6 +53,7 @@ setopt HIST_REDUCE_BLANKS        # Remove superfluous blanks before recording en
 setopt HIST_VERIFY               # Don't execute immediately upon history expansion.
 setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 setopt INC_APPEND_HISTORY        # adds commands as they are typed, not at shell exit
+setopt APPEND_HISTORY            # append to history file
 
 # if you do a 'rm *', Zsh will give you a sanity check!
 setopt RM_STAR_WAIT
@@ -481,3 +482,7 @@ fi
 ###-tns-completion-end-###
 
 eval "$(rbenv init -)"
+#>>> The kernel-mode plugin has a new place.
+#>>> It's now located under /usr/lib/rp-pppoe/rp-pppoe.so
+#>>> Change LINUX_PLUGIN to the new path in your /etc/ppp/pppoe.conf
+
