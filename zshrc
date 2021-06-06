@@ -490,3 +490,4 @@ eval "$(rbenv init -)"
 #>>> It's now located under /usr/lib/rp-pppoe/rp-pppoe.so
 #>>> Change LINUX_PLUGIN to the new path in your /etc/ppp/pppoe.conf
 
+[[ -e "$HOME/.cargo/bin" ]] && export PATH="$HOME/.cargo/bin":$PATH
