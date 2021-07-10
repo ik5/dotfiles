@@ -120,6 +120,8 @@ fi
 
 export GOROOT=$(go env GOROOT)
 
+export PG_COLOR=auto  # Specifies whether to use color in diagnostic messages.
+
 if [[ "$OS" == "linux" ]]; then
   alias ls='ls --color=always'
 elif [[ "$OS" == "macosx" || "$OS" == "bsd" ]]; then

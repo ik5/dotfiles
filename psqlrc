@@ -29,4 +29,3 @@ set intervalstyle to 'postgres_verbose';
 \set IGNOREEOF 5
 
 -- display application name in pg_stat_activity
-set application_name to manni_desktop; commit;
