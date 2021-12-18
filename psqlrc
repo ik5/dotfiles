@@ -2,8 +2,10 @@
 \encoding UTF8
 -- Prompt on xterm title:
 -- %033]0;psql %M:%> %n@%~%R%#%x%007
-\set PROMPT1 '%M:%> %n@%~%R%#%x %033]0;psql %M:%> %n@%~%R%#%x%007'
-\set PROMPT2 '... %R> '
+-- \set PROMPT1 '%M:%> %n@%~%R%#%x %033]0;psql %M:%> %n@%~%R%#%x%007 '
+\set PROMPT1 '%l %n@%M:%>/%/ %x%# '
+\set PROMPT2 '%l %R %x> '
+\set PROMPT3 = '%l >> '
 \set ON_ERROR_STOP on
 \set ON_ERROR_ROLLBACK interactive
 -- Ensure autocompleted keywords stay lowercase
