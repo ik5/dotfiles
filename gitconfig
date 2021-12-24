@@ -62,6 +62,7 @@
   regexp  = !git rev-list --all | xargs git grep -i -n -P
   count   = git rev-list --count
   cleanup = git gc --prune=now --aggressive
+  ver = describe --always --tags --dirty
 [push]
   default = matching
 [http "https://gopkg.in"]
