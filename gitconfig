@@ -8,7 +8,8 @@
   quotepath = false
   precomposeunicode = true
   logAllRefUpdates = true
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  ; pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
   autocrlf = input
 [pull]
   rebase = false
@@ -20,7 +21,10 @@
   ui = auto
   diff = auto
   grep = auto
-#[merge]
+[interactive]
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = diff3
 #  ff = false
 #  tool = vimdiff
 [alias]
@@ -78,6 +82,8 @@
 [rerere]
   enabled = 1
   autoupdate = 1
+[diff]
+  colorMoved = default
 [difftool]
   prompt = true
 [mergetool "vimdiff"]
@@ -85,6 +91,8 @@
 [mergetool "meld"]
   trustExitCode = true
   cmd = open -W -a Meld --args --auto-merge \"$LOCAL\" \"$BASE\" \"$REMOTE\" --output=\"$MERGED\"
+[delta]
+    navigate = true  # use n and N to move between diff sections
 [transfer]
   fsckobjects = true
 [fetch]
