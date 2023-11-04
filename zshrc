@@ -449,7 +449,7 @@ export PATH="$HOME/.gem/ruby/$ruby_version.0/bin":$PATH
 alias nvimdiff="nvim -d"
 alias vimdiff="nvim -d"
 alias vidadd="sudo modprobe uvcvideo"
-alias vidrm="sudo modprobe -r uvcvideo"
+alias vidrm="sudo modprobe -r uvcvideo || sudo rmmod uvcvideo -f"
 alias mount_vm="sudo mount /run/media/ik/home_fs/ik/VirtualBox\ VMs ~/VirtualBox\ VMs --bind"
 # pretty, show also column and use smart case (if start small -> case insensitive)
 # if start capital then case sensitive
