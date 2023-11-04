@@ -105,3 +105,5 @@
 
 [protocol]
   version = 2
+[safe]
+	directory = /opt/flutter
