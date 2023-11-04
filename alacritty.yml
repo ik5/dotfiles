@@ -1,0 +1,66 @@
+---
+live_config_reload: true
+
+import:
+  - ~/.config/alacritty/themes/themes/monokai_charcoal.yaml
+
+window:
+  dynamic_title: true
+  startup_mode: Windowed
+  decorations: full
+  opacity: 0.95
+  decorations_theme_variant: Dark
+
+scrolling:
+  multiplier: 3
+
+selection:
+  save_to_clipboard: true
+  semantic_escape_chars: ",│`|:\"' ()[]{}<>\t"
+
+cursor:
+  style:
+    shape: Block
+    blinking: Off
+  unfocused_hollow: true
+  thickness: 0.15
+
+mouse:
+  hide_when_typing: true
+
+key_bindings:
+  - key: Equals
+    mods: Command|Shift
+    action: IncreaseFontSize
+  - key: Minus
+    mods: Command|Shift
+    action: DecreaseFontSize
+  - key: F11
+    action: ToggleFullscreen
+
+font:
+  size: 10
+
+  offset:
+    x: 0
+    y: 3
+
+  normal:
+    family: Mononoki Nerd Font Mono
+    style: Regular
+
+  bold:
+    family: Mononoki Nerd Font Mono
+    style: Bold
+
+  italic:
+    family: Mononoki Nerd Font Mono
+    style: Italic
+
+  bold_italic:
+    family: Mononoki Nerd Font Mono
+    style: Bold Italic
+
+env:
+  TERM: xterm-256color
+
