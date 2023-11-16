@@ -1,6 +1,8 @@
 [user]
   name = Ido Kanner
   email = idok@linesip.com
+[init]
+	defaultBranch = main
 [core]
   editor = nvim
   excludesfile = /home/ik/.gitignore
