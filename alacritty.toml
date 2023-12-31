@@ -1,0 +1,72 @@
+import = ["/home/ik/.config/alacritty/themes/themes/monokai_charcoal.toml"]
+live_config_reload = true
+
+[cursor]
+thickness = 0.15
+unfocused_hollow = true
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10
+
+[font.bold]
+family = "Mononoki Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "Mononoki Nerd Font Mono"
+style = "Bold Italic"
+
+[font.glyph_offset]
+x = 0
+y = 0
+
+[font.italic]
+family = "Mononoki Nerd Font Mono"
+style = "Italic"
+
+[font.normal]
+family = "Mononoki Nerd Font Mono"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 3
+
+[[keyboard.bindings]]
+action = "IncreaseFontSize"
+key = "Equals"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "DecreaseFontSize"
+key = "Minus"
+mods = "Command|Shift"
+
+[[keyboard.bindings]]
+action = "ToggleFullscreen"
+key = "F11"
+
+[mouse]
+hide_when_typing = true
+
+[scrolling]
+multiplier = 3
+
+[selection]
+save_to_clipboard = true
+semantic_escape_chars = ",│`|:\"' ()[]{}<>\t"
+
+[window]
+decorations = "full"
+decorations_theme_variant = "Dark"
+dynamic_padding = true
+dynamic_title = true
+opacity = 0.95
+startup_mode = "Windowed"
